@@ -1,4 +1,12 @@
 <div class="myCard mat-elevation-z5 card-2">
+  <button
+    mat-raised-button
+    class="margin-top"
+    routerLink="/administrator"
+    color="warn"
+  >
+    Back
+  </button>
   <h1>Editeaza produs</h1>
   <div class="profile-image">
     <img
@@ -71,13 +79,15 @@
     <div class="center margin-top"></div>
 
     <div class="center margin-top flex">
-      <button mat-stroked-button color="primary" type="submit">
-        <mat-icon>edit</mat-icon> 
+      <button
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        style="background-color: green; color: white"
+      >
+        <mat-icon>edit</mat-icon>
         Editeaza produs
       </button>
     </div>
   </form>
-  <button mat-raised-button class="margin-top" routerLink="/administrator">
-    Administrator
-  </button>
 </div>

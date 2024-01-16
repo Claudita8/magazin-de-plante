@@ -58,25 +58,37 @@
           <div class="example-element-detail">
             <img [src]="element.image" width="250" height="250" alt="" />
             <div class="expanded-description">
-              <mat-label>Nume</mat-label>
-              <p>{{ element.name }}</p>
-              <mat-label>Categorie</mat-label>
-              <p>{{ element.category }}</p>
-              <mat-label>Descriere</mat-label>
-              <p>{{ element.description }}</p>
-              <mat-label>Ghid Utilizare</mat-label>
-              <p>{{ element.ghidDeIngrijire }}</p>
-              <button
-                mat-raised-button
-                [routerLink]="'/edit-product/' + element.id"
-              >
-                Editeaza
-              </button>
+              <div class="detail-row">
+                <mat-label>Nume: </mat-label>
+                <p>{{ element.name }}</p>
+              </div>
+              <div class="detail-row">
+                <mat-label>Categorie: </mat-label>
+                <p>{{ element.category }}</p>
+              </div>
+              <div class="detail-row">
+                <mat-label>Descriere: </mat-label>
+                <p>{{ element.description }}</p>
+              </div>
+              <div class="detail-row">
+                <mat-label>Ghid Utilizare: </mat-label>
+                <p>{{ element.ghidDeIngrijire }}</p>
+              </div>
 
+              <div>
+                <button
+                  mat-raised-button
+                  [routerLink]="'/edit-product/' + element.id"
+                  style="background-color: green; color: white"
+                >
+                  <mat-icon>edit</mat-icon>
+                  Editeaza produs
+                </button>
+              </div>
               <div>
                 <button mat-raised-button color="warn">
                   <mat-icon>delete</mat-icon>
-                  Sterge Produs
+                  Sterge produs
                 </button>
               </div>
             </div>

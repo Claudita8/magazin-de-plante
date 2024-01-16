@@ -21,18 +21,17 @@ img {
   gap: 10px;
 }
 
-// .mat-raised-button {
-//   width: 150px; /* Setează lățimea dorită */
-//   height: 36px; /* Setează înălțimea dorită */
-// }
+.example-element-detail {
+  display: flex;
+}
 
-// /* Selector pentru butoanele din zona extinsă a tabelului */
-// .example-element-detail .mat-raised-button {
-//   width: 150px; /* Setează lățimea dorită */
-//   height: 36px; /* Setează înălțimea dorită */
-// }
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
 
-// .example-element-detail {
-//   display: flex;
-//   gap: 10px;
-// }
+mat-label {
+  margin-right: 5px;
+}
