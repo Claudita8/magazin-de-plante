@@ -1,0 +1,11 @@
+.product-card {
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  box-shadow: 2px;
+  .img {
+    object-fit: cover;
+    width: 223px;
+    height: 195px;
+  }
+}

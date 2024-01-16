@@ -1,0 +1,27 @@
+
+<div class="card-container">
+  @for(product of data(); track product.id) {
+  <div class="card">
+    <product [product]="product"></product>
+  </div>
+  }
+</div>
+
+<!-- <form #formProduct="ngForm" (ngSubmit)="submit(formProduct, data().length + 1)">
+  <label>Name</label>
+  <input type="text" name="name" [(ngModel)]="productInfo.name" />
+  <label>Price</label>
+  <input type="number" name="price" [(ngModel)]="productInfo.price" />
+  <label>Description</label>
+  <input type="text" name="description" [(ngModel)]="productInfo.description"/>
+  <label>Ghid de Ingrijire</label>
+  <input
+    type="text"
+    name="ghidDeIngrijire"
+    [(ngModel)]="productInfo.ghidDeIngrijire"
+  />
+  <label>Image</label>
+  <input type="file" (change)="onFileChange($event)" />
+  <button type="submit">Submit</button>
+</form>
+{{ productInfo | json }} -->

@@ -1,0 +1,83 @@
+<div class="myCard mat-elevation-z5 card-2">
+  <h1>Editeaza produs</h1>
+  <div class="profile-image">
+    <img
+      width="120"
+      height="120"
+      class="margin-top mat-elevation-z1"
+      [src]="editProduct().image ?? ''"
+      alt=""
+    />
+    <input
+      #fileUpload
+      type="file"
+      class="file-input"
+      (change)="uploadFile($event)"
+    />
+    <button mat-mini-fab (click)="fileUpload.click()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="editProductsForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label> Nume produs </mat-label>
+      <input
+        matInput
+        placeholder="Nume produs"
+        type="text"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Categorie </mat-label>
+      <mat-select formControlName="category">
+        @for(c of category;track c.id){
+        <mat-option [value]="c.value">{{ c.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Pret </mat-label>
+      <input
+        matInput
+        placeholder="Pret"
+        type="number"
+        formControlName="price"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Stoc </mat-label>
+      <input
+        matInput
+        placeholder="Stoc"
+        type="number"
+        formControlName="stock"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Descriere </mat-label>
+      <textarea matInput placeholder="Descriere" formControlName="description">
+      </textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Ghid de ingrijire </mat-label>
+      <textarea
+        matInput
+        placeholder="Ghid de ingrijire"
+        formControlName="ghidDeIngrijire"
+      >
+      </textarea>
+    </mat-form-field>
+    <div class="center margin-top"></div>
+
+    <div class="center margin-top flex">
+      <button mat-stroked-button color="primary" type="submit">
+        <mat-icon>edit</mat-icon> 
+        Editeaza produs
+      </button>
+    </div>
+  </form>
+  <button mat-raised-button class="margin-top" routerLink="/administrator">
+    Administrator
+  </button>
+</div>

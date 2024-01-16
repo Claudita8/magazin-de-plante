@@ -1,0 +1,38 @@
+div {
+  overflow: hidden;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+img {
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.expanded-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.example-element-detail {
+  display: flex;
+  gap: 10px;
+}
+
+// .mat-raised-button {
+//   width: 150px; /* Setează lățimea dorită */
+//   height: 36px; /* Setează înălțimea dorită */
+// }
+
+// /* Selector pentru butoanele din zona extinsă a tabelului */
+// .example-element-detail .mat-raised-button {
+//   width: 150px; /* Setează lățimea dorită */
+//   height: 36px; /* Setează înălțimea dorită */
+// }
+
+// .example-element-detail {
+//   display: flex;
+//   gap: 10px;
+// }

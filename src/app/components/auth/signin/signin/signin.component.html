@@ -1,0 +1,38 @@
+<div class="myCard mat-elevation-z5">
+  <h1>Autentificare</h1>
+  <form [formGroup]="signInForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label> Adresa email </mat-label>
+      <input matInput placeholder="Nume" type="email" formControlName="email" />
+      <mat-error *ngIf="email?.hasError('required')">
+        Numele este necesar sa fie introdus
+      </mat-error>
+      <mat-error *ngIf="email?.hasError('email')">
+        Introdu o adresa de email valida
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Parola </mat-label>
+      <input
+        matInput
+        placeholder="Nume"
+        type="password"
+        formControlName="password"
+        name="password"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="password?.hasError('required')">
+      Parola nu este introdusa
+    </mat-error>
+    <div class="center margin-top flex">
+      <button mat-stroked-button color="primary" type="submit">
+        Intra in cont
+      </button>
+      <div class="center margin-top">
+        <button mat-stroked-button routerLink="/signup">
+          Creeaza un cont nou
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

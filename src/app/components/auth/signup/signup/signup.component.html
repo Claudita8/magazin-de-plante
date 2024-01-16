@@ -1,0 +1,53 @@
+<div class="myCard mat-elevation-z5">
+  <h1>Inregistrare</h1>
+  <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label> Nume </mat-label>
+      <input matInput placeholder="Nume" type="text" formControlName="name" />
+      <mat-error *ngIf="name?.hasError('required')">
+        Numele este necesar sa fie introdus
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Adresa email </mat-label>
+      <input matInput placeholder="Nume" type="email" formControlName="email" />
+      <mat-error *ngIf="email?.hasError('required')">
+        Numele este necesar sa fie introdus
+      </mat-error>
+      <mat-error *ngIf="email?.hasError('email')">
+        Introdu o adresa de email valida
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Parola </mat-label>
+      <input
+        matInput
+        placeholder="Nume"
+        type="password"
+        formControlName="password"
+        name="password"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Confirma parola </mat-label>
+      <input
+        matInput
+        placeholder="Nume"
+        type="password"
+        formControlName="confirmPassword"
+        name="confirmPassword"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="signUpForm?.hasError('passwordMisMatch')">
+      Parola introdusa nu este la fel
+    </mat-error>
+    <div class="center margin-top flex">
+      <button mat-stroked-button color="primary" type="submit">
+        Creaza cont
+      </button>
+      <div class="center margin-top">
+        <button mat-stroked-button routerLink="/signin">Ai deja un cont</button>
+      </div>
+    </div>
+  </form>
+</div>

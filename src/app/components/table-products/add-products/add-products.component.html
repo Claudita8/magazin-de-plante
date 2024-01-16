@@ -1,0 +1,75 @@
+<div *ngIf="productsService.products$ | async as products; else loading">
+  <div class="myCard mat-elevation-z5 card-2">
+    <h1>Adauga produs</h1>
+    <form [formGroup]="productsForm" (ngSubmit)="submit(products.length + 1)">
+      <mat-form-field>
+        <mat-label> Nume produs </mat-label>
+        <input
+          matInput
+          placeholder="Nume produs"
+          type="text"
+          formControlName="name"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Categorie </mat-label>
+        <mat-select formControlName="category">
+          @for(c of category;track c.id){
+          <mat-option [value]="c.value">{{ c.value }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Pret </mat-label>
+        <input
+          matInput
+          placeholder="Pret"
+          type="number"
+          formControlName="price"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Stoc </mat-label>
+        <input
+          matInput
+          placeholder="Stoc"
+          type="number"
+          formControlName="stock"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Descriere </mat-label>
+        <textarea
+          matInput
+          placeholder="Descriere"
+          formControlName="description"
+        >
+        </textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Ghid de ingrijire </mat-label>
+        <textarea
+          matInput
+          placeholder="Ghid de ingrijire"
+          formControlName="ghidDeIngrijire"
+        >
+        </textarea>
+      </mat-form-field>
+      <div class="center margin-top">
+        <app-file-upload formControlName="image"></app-file-upload>
+      </div>
+
+      <div class="center margin-top flex">
+        <button mat-stroked-button color="primary" type="submit">
+          <mat-icon>add</mat-icon>
+          Adauga produs
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="center">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>
