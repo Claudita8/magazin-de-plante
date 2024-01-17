@@ -1,5 +1,5 @@
 <div class="myCard mat-elevation-z5">
-  <h1>Inregistrare</h1>
+  <h1><mat-icon>person</mat-icon>Inregistrare</h1>
   <form [formGroup]="signUpForm" (ngSubmit)="submit()">
     <mat-form-field>
       <mat-label> Nume </mat-label>
@@ -42,11 +42,22 @@
       Parola introdusa nu este la fel
     </mat-error>
     <div class="center margin-top flex">
-      <button mat-stroked-button color="primary" type="submit">
+      <button
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        style="background-color: rgb(0, 125, 250); color: white"
+      >
         Creaza cont
       </button>
       <div class="center margin-top">
-        <button mat-stroked-button routerLink="/signin">Ai deja un cont</button>
+        <button
+          mat-stroked-button
+          routerLink="/signin"
+          style="background-color: rgb(71, 163, 255); color: white"
+        >
+          Ai deja un cont
+        </button>
       </div>
     </div>
   </form>

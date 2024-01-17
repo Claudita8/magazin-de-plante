@@ -1,5 +1,5 @@
 <div class="myCard mat-elevation-z5">
-  <h1>Autentificare</h1>
+  <h1><mat-icon>person</mat-icon>Autentificare</h1>
   <form [formGroup]="signInForm" (ngSubmit)="submit()">
     <mat-form-field>
       <mat-label> Adresa email </mat-label>
@@ -24,12 +24,21 @@
     <mat-error *ngIf="password?.hasError('required')">
       Parola nu este introdusa
     </mat-error>
-    <div class="center margin-top flex">
-      <button mat-stroked-button color="primary" type="submit">
+    <div class="center margin-top flex-column">
+      <button
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        style="background-color: rgb(0, 125, 250); color: white"
+      >
         Intra in cont
       </button>
       <div class="center margin-top">
-        <button mat-stroked-button routerLink="/signup">
+        <button
+          mat-stroked-button
+          routerLink="/signup"
+          style="background-color: rgb(71, 163, 255); color: white"
+        >
           Creeaza un cont nou
         </button>
       </div>

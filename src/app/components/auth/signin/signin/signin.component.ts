@@ -8,6 +8,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../../../service/users.service';
 import { NotificationService } from '../../../../service/notification.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-signin',
@@ -16,6 +17,7 @@ import { NotificationService } from '../../../../service/notification.service';
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     MatButtonModule,
     RouterModule,
     ReactiveFormsModule,
