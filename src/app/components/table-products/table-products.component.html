@@ -86,7 +86,11 @@
                 </button>
               </div>
               <div>
-                <button mat-raised-button color="warn">
+                <button
+                  mat-raised-button
+                  color="warn"
+                  (click)="deleteProduct(element)"
+                >
                   <mat-icon>delete</mat-icon>
                   Sterge produs
                 </button>

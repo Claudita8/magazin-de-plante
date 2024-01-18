@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from './service/auth.service';
 import { UsersService } from './service/users.service';
 import { NotificationService } from './service/notification.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ import { NotificationService } from './service/notification.service';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

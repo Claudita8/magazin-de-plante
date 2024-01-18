@@ -2,13 +2,33 @@
   <div>
     Magazin plante
     <button mat-button routerLink="">Acasa</button>
-    <button mat-button routerLink="/administrator">Administrator</button>
-    <button mat-button routerLink="">Contact</button>
+    <button mat-button routerLink="about-us">Contact</button>
   </div>
   <div>
-    <button mat-button (click)="logout()">
-      <mat-icon>logout</mat-icon>Deconectare
+    <button mat-button [matMenuTriggerFor]="menu">
+      {{ currentUser()?.email }}<mat-icon>expand_more</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>account_circle</mat-icon>
+        Profil
+      </button>
+      <button
+        mat-menu-item
+        routerLink="/administrator"
+        *ngIf="currentUser()?.isAdmin"
+      >
+        <mat-icon>account_circle</mat-icon>
+        Administrator
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+    <!-- <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>Deconectare
+    </button> -->
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>

@@ -43,4 +43,9 @@ export class UsersService {
     const result = await uploadBytes(storageRef, image);
     return await getDownloadURL(result.ref);
   }
+
+  updateUser(user: any) {
+    const ref = doc(this.firestore, 'users', user.uid);
+    return updateDoc(ref, { ...user });
+  }
 }

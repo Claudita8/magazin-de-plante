@@ -1,69 +1,32 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { OnInit, Component, ViewChild, inject } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ProductsService } from '../../service/products.service';
+import { NotificationService } from '../../service/notification.service';
+import { MatIconModule } from '@angular/material/icon';
 
-export interface UserData {
-  id: string;
-  data: Date;
-  utilizator: string;
-  email: string;
-  solicitare: string;
-}
+import { MatGridListModule } from '@angular/material/grid-list';
 
-const DATES: Date[] = [
-  new Date(),
-  new Date('2023-01-15'),
-  new Date('2023-02-28'),
-  new Date('2023-03-10'),
-  new Date('2023-04-05'),
-  new Date('2023-05-20'),
-  new Date('2023-06-07'),
-  new Date('2023-07-12'),
-  new Date('2023-08-22'),
-  new Date('2023-09-30'),
-];
+import { MatDialog } from '@angular/material/dialog';
+import {
+  MatSlideToggleChange,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 
-const USERS: string[] = [
-  'John Doe',
-  'Jane Smith',
-  'Robert Johnson',
-  'Emma White',
-  'Michael Brown',
-  'Olivia Davis',
-  'William Wilson',
-  'Sophia Jones',
-  'James Taylor',
-  'Ava Lee',
-];
-
-const EMAILS: string[] = [
-  'john.doe@example.com',
-  'jane.smith@example.com',
-  'robert.johnson@example.com',
-  'emma.white@example.com',
-  'michael.brown@example.com',
-  'olivia.davis@example.com',
-  'william.wilson@example.com',
-  'sophia.jones@example.com',
-  'james.taylor@example.com',
-  'ava.lee@example.com',
-];
-
-const REQUESTS: string[] = [
-  'Solicitare de asistență pentru produsul Conifere.',
-  'Întrebare privind starea comenzii pentru comanda #12345.',
-  'Asistență pentru crearea unui cont nou.',
-  'Asistență tehnică necesară pentru autentificarea contului.',
-  'Cerere de facturare pentru factura #67890.',
-  'Feedback despre achiziția recentă.',
-  'Plângere privind timpul de nefuncționare a serviciului.',
-  'Feedback despre achiziția recentă.',
-  'Asistență pentru crearea unui cont nou.',
-  'întrebare cu privire la promoțiile viitoare.',
-];
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { UserListService } from '../../service/user-list.service';
 
 @Component({
   selector: 'table-users',
@@ -77,64 +40,66 @@ const REQUESTS: string[] = [
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+  ],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
   ],
 })
-export class TableUsersComponent implements AfterViewInit {
-  displayedColumns: string[] = [
-    'id',
-    'data',
-    'utilizator',
-    'email',
-    'solicitare',
+export class TableUsersComponent implements OnInit {
+  usertListService = inject(UserListService);
+  notification = inject(NotificationService);
+  columnsToDisplay: string[] = [
+    'photoURL',
+    'firstName',
+    'lastName',
+    'displayName',
+    'phoneNumber',
+    'address',
+    'actions',
   ];
-  dataSource: MatTableDataSource<UserData>;
+  columnNames: any = {
+    photoURL: 'Poza profil',
+    firstName: 'Prenume',
+    lastName: 'Nume familie',
+    displayName: 'Nume Afisat',
+    phoneNumber: 'Telefon',
+    address: 'Adresa',
+  };
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  dataSource!: MatTableDataSource<any>;
+  expandedElement: any;
 
-  constructor() {
-    const users = USERS.map((USERS, index) =>
-      createNewUser(
-        index + 1,
-        DATES[index],
-        USERS,
-        EMAILS[index],
-        REQUESTS[index]
-      )
-    );
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-    this.dataSource = new MatTableDataSource(users);
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  constructor() {}
+  ngOnInit(): void {
+    this.usertListService.getUsersList().subscribe((user) => {
+      this.dataSource = new MatTableDataSource(user);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    console.log('filterValue', filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
-}
 
-function createNewUser(
-  id: number,
-  data: Date,
-  utilizator: string,
-  email: string,
-  solicitare: string
-): UserData {
-  return {
-    id: id.toString(),
-    data: data,
-    utilizator: utilizator,
-    email: email,
-    solicitare: solicitare,
-  };
+  onAdminToggleChange(userId: string, event: MatSlideToggleChange) {
+    this.usertListService.updateUser(userId, event.checked);
+  }
 }

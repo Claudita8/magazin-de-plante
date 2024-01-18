@@ -1,0 +1,81 @@
+<div class="myCard mat-elevation-z5 card-2">
+  <h1>Editeaza profil</h1>
+  <div class="profile-image">
+    <img
+      width="120"
+      height="120"
+      class="margin-top mat-elevation-z1"
+      alt=""
+      [src]="
+        userService.currentUserProfile()?.photoURL ?? '/assets/UserLogo.jpg'
+      "
+    />
+    <input
+      #fileUpload
+      type="file"
+      class="file-input"
+      (change)="uploadFile($event)"
+    />
+    <button mat-mini-fab (click)="fileUpload.click()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="profileForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label> Prenume </mat-label>
+      <input
+        matInput
+        placeholder="Prenume"
+        type="text"
+        formControlName="firstName"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Nume </mat-label>
+      <input
+        matInput
+        placeholder="Nume Familie"
+        type="text"
+        formControlName="lastName"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Porecla </mat-label>
+      <input
+        matInput
+        placeholder="Nickname"
+        type="text"
+        formControlName="displayName"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Numar telefon </mat-label>
+      <input
+        matInput
+        placeholder="Numar telefon"
+        type="number"
+        formControlName="phoneNumber"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Adresa </mat-label>
+      <input
+        matInput
+        placeholder="Strada, Numar, Localitate, Judet"
+        type="text"
+        formControlName="address"
+      />
+    </mat-form-field>
+    <div class="center margin-top flex">
+      <button
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        style="background-color: green; color: white"
+      >
+        <mat-icon>edit</mat-icon>
+        Editeaza profil
+      </button>
+    </div>
+  </form>
+</div>

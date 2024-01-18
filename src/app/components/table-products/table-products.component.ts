@@ -22,6 +22,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { DeleteProductsComponent } from './delete-products/delete-products.component';
 
 @Component({
   selector: 'table-products',
@@ -54,6 +55,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class TableProductsComponent implements OnInit {
   productService = inject(ProductsService);
   notification = inject(NotificationService);
+  dialog = inject(MatDialog);
   columnsToDisplay: string[] = ['name', 'price', 'stock', 'category'];
   columnNames: any = {
     name: 'Denumire Produs',
@@ -82,5 +84,27 @@ export class TableProductsComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     console.log('filterValue', filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  async deleteProduct(product: any) {
+    const dialogRef = this.dialog.open(DeleteProductsComponent, {
+      data: {
+        message: 'Esti sigur ca vrei sa stergi produsul?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'yes') {
+        try {
+          this.notification.showLoading();
+          this.productService.deleteProduct(product);
+          this.notification.success('Produsul a fost sters cu succes!');
+        } catch (error: any) {
+          this.notification.error(error.message);
+        } finally {
+          this.notification.hideLoading();
+        }
+      }
+    });
   }
 }
