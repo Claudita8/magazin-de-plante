@@ -1,26 +1,88 @@
+<div style="text-align: center">
+  <h2>Despre noi - Atelierul verde</h2>
+  <p>
+    Bine ați venit la Atelierul Verde, destinația ta online pentru plantele care
+    aduc viață și frumusețe în locuința ta! Suntem o echipă pasionată de natură
+    și horticultură, dedicată să împărtășească bucuria cultivării plantelor și
+    creării unui mediu verde în jurul nostru.
+  </p>
+</div>
+
 <mat-accordion>
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          This is the expansion title
-        </mat-panel-title>
-        <mat-panel-description>
-          This is a summary of the content
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Self aware panel
-        </mat-panel-title>
-        <mat-panel-description>
-          Currently I am {{panelOpenState ? 'open' : 'closed'}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>I'm visible because I am open</p>
-    </mat-expansion-panel>
-  </mat-accordion>
-  
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Cine suntem? </mat-panel-title>
+      <mat-panel-description>
+        <!-- {{ panelOpenState ? "open" : "closed" }} -->
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>
+      Atelierul Verde este gestionat de către AGRO DENMAR SRL, un producător
+      autorizat cu o vastă experiență în cultivarea și comercializarea
+      plantelor. Sub brandul nostru, Pepiniera Maia, ne-am specializat în
+      producția și importul de arbusti fructiferi și ornamentali, plante perene,
+      puieti forestieri, conifere și arbori ornamentali. Înființată cu pasiune
+      și grijă pentru natură, echipa noastră aduce o gamă variată de plante de
+      calitate, menite să transforme spațiul tău într-un paradis verde.
+    </p>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Ce oferim? </mat-panel-title>
+      <mat-panel-description>
+        <!-- {{ panelOpenState ? "open" : "closed" }} -->
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>
+      La Atelierul Verde, vă punem la dispoziție o selecție diversificată de
+      arbori și arbuști fructiferi, pomi fructiferi, vita de vie, trandafiri și
+      plante ornamentale, toate la prețuri avantajoase. Ne mândrim cu faptul că
+      livrăm rapid în toată Romania, aducând natura direct la ușa ta.
+    </p>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>Calitate certificată </mat-panel-title>
+      <mat-panel-description>
+        <!-- {{ panelOpenState ? "open" : "closed" }} -->
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>
+      Pepiniera noastră este autorizată de către ITCSMS (Inspectoratul
+      Teritorial pentru Calitatea Semințelor și Materialului Săditor), singurul
+      organism de stat abilitat să inspecteze și să certifice producătorii și
+      soiurile de plante ce pot fi comercializate în România. Astfel, garantăm
+      că fiecare plantă achiziționată de la Atelierul Verde este de cea mai
+      înaltă calitate.
+    </p>
+  </mat-expansion-panel>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Experiență cu Atelierul Verde </mat-panel-title>
+      <mat-panel-description>
+        <!-- {{ panelOpenState ? "open" : "closed" }} -->
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>
+      Clienții noștri nu primesc doar plante de excepție. La Atelierul Verde,
+      oferim și garantie, recomandări personalizate și consultanță specializată.
+      Ne dorim să te sprijinim în fiecare etapă a călătoriei tale de grădinar și
+      să facem experiența cumpărăturilor online de plante cât mai plăcută și
+      informativă. Alătură-te comunității noastre și transformă spațiul tău
+      într-o oază de frumusețe și prospețime cu plantele de la Atelierul Verde!
+    </p>
+  </mat-expansion-panel>
+  <button>Scrie-ne</button>
+</mat-accordion>

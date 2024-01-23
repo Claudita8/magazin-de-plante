@@ -7,27 +7,27 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 export interface UserData {
   id: string;
-  data: Date;
-  utilizator: string;
-  adresa: string;
-  pretTotal: string;
-  produseComandate: string;
+  emailAddress: string;
+  phoneNumber: string;
+  subject: string;
+  message: string;
 }
 
-const DATES: Date[] = [];
+const EMAIL_ADDRESSES: string[] = [
+  'claudiaolaru15@gmail.com',
+  'mmmmmm@yahoo.com',
+];
 
-const USERS: string[] = [];
+const PHONE_NUMBERS: string[] = ['752647392', '752647392'];
 
-const ADDRESSES: string[] = [];
+const SUBJECTS: string[] = ['subiect', 'subiect2'];
 
-const FINAL_PRICES: number[] = [];
-
-const PRODUCTS_ORDERED: string[] = [];
+const MESSAGES: string[] = ['mesaj', 'mesaj2'];
 
 @Component({
-  selector: 'table-orders',
-  styleUrls: ['./table-orders.component.scss'],
-  templateUrl: 'table-orders.component.html',
+  selector: 'table-contact',
+  styleUrls: ['./table-contact.component.scss'],
+  templateUrl: 'table-contact.component.html',
   standalone: true,
 
   imports: [
@@ -38,14 +38,13 @@ const PRODUCTS_ORDERED: string[] = [];
     MatPaginatorModule,
   ],
 })
-export class TableOrdersComponent implements AfterViewInit {
+export class TableContactComponent {
   displayedColumns: string[] = [
     'id',
-    'data',
-    'utilizator',
-    'adresa',
-    'pretTotal',
-    'produseComandate',
+    'emailAddress',
+    'phoneNumber',
+    'subject',
+    'message',
   ];
   dataSource: MatTableDataSource<UserData>;
 
@@ -55,18 +54,17 @@ export class TableOrdersComponent implements AfterViewInit {
   sort!: MatSort;
 
   constructor() {
-    const orders = USERS.map((USERS, index) =>
-      createNewOrder(
+    const contact = EMAIL_ADDRESSES.map((EMAIL_ADDRESSES, index) =>
+      createContact(
         index + 1,
-        DATES[index],
-        USERS,
-        ADDRESSES[index],
-        FINAL_PRICES[index],
-        PRODUCTS_ORDERED[index]
+        EMAIL_ADDRESSES,
+        PHONE_NUMBERS[index],
+        SUBJECTS[index],
+        MESSAGES[index]
       )
     );
 
-    this.dataSource = new MatTableDataSource(orders);
+    this.dataSource = new MatTableDataSource(contact);
   }
 
   ngAfterViewInit() {
@@ -84,22 +82,18 @@ export class TableOrdersComponent implements AfterViewInit {
   }
 }
 
-function createNewOrder(
+function createContact(
   id: number,
-  data: Date,
-  utilizator: string,
-  adresa: string,
-  pretTotal: number,
-  produseComandate: string
+  adresaEmail: string,
+  numarTelefon: string,
+  subiect: string,
+  mesaj: string
 ): UserData {
-  const pretTot = pretTotal.toString();
-
   return {
     id: id.toString(),
-    data: data,
-    utilizator: utilizator,
-    adresa: adresa,
-    pretTotal: pretTot,
-    produseComandate: produseComandate,
+    emailAddress: adresaEmail,
+    phoneNumber: numarTelefon,
+    subject: subiect,
+    message: mesaj,
   };
 }

@@ -75,25 +75,33 @@
                 <p>{{ element.ghidDeIngrijire }}</p>
               </div>
 
-              <div>
-                <button
-                  mat-raised-button
-                  [routerLink]="'/edit-product/' + element.id"
-                  style="background-color: green; color: white"
-                >
-                  <mat-icon>edit</mat-icon>
-                  Editeaza produs
-                </button>
-              </div>
-              <div>
-                <button
-                  mat-raised-button
-                  color="warn"
-                  (click)="deleteProduct(element)"
-                >
-                  <mat-icon>delete</mat-icon>
-                  Sterge produs
-                </button>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: max-content auto;
+                  gap: 25px;
+                "
+              >
+                <div>
+                  <button
+                    mat-raised-button
+                    [routerLink]="'/edit-product/' + element.id"
+                    style="background-color: green; color: white"
+                  >
+                    <mat-icon>edit</mat-icon>
+                    Editeaza produs
+                  </button>
+                </div>
+                <div>
+                  <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="deleteProduct(element)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                    Sterge produs
+                  </button>
+                </div>
               </div>
             </div>
           </div>

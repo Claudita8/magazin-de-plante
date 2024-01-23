@@ -1,9 +1,13 @@
 <mat-toolbar color="primary" *ngIf="authService.currentUser()">
   <div>
-    Magazin plante
-    <button mat-button routerLink="">Acasa</button>
-    <button mat-button routerLink="about-us">Contact</button>
+    <img [src]="'/assets/LogoApp.jpg'" width="50" height="50" />
   </div>
+
+  <div>
+    <button mat-button routerLink="">Acasa</button>
+    <button mat-button routerLink="about-us">Despre noi</button>
+  </div>
+
   <div>
     <button mat-button [matMenuTriggerFor]="menu">
       {{ currentUser()?.email }}<mat-icon>expand_more</mat-icon>
