@@ -54,4 +54,23 @@ export class SigninComponent {
       this.notificationService.hideLoading();
     }
   }
+
+  async forgotPassword() {
+    const { email } = this.signInForm.value;
+    if (!email) {
+      this.notificationService.error('Introdu adresa ta de email');
+      return;
+    }
+    try {
+      this.notificationService.showLoading();
+      await this.authService.passwordReset(email);
+      this.notificationService.success(
+        'Link-ul pentru resetarea parolei a fost trimis'
+      );
+    } catch (error: any) {
+      this.notificationService.error(error.message);
+    } finally {
+      this.notificationService.hideLoading();
+    }
+  }
 }

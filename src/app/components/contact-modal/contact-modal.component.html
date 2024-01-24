@@ -1,0 +1,31 @@
+<div
+  class="myCard"
+  *ngIf="aboutUsService.contactCollection$ | async as contactCollection"
+>
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="submit(contactCollection.length + 1)"
+  >
+    <h1>Scrie-ne</h1>
+    <mat-form-field>
+      <mat-label> Motivul: </mat-label>
+      <textarea
+        formControlName="reason"
+        matInput
+        placeholder="Motivul"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Nivelul de severitate: </mat-label>
+      <mat-select formControlName="severity">
+        <mat-option value="Mica"> Severitate mica </mat-option>
+        <mat-option value="Medie"> Severitate medie </mat-option>
+        <mat-option value="Mare"> Severitate mare </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="margin-top">
+      Trimite
+    </button>
+  </form>
+  <button mat-button (click)="dialog.close()">Inchide</button>
+</div>

@@ -1,28 +1,28 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-export interface UserData {
-  id: string;
-  emailAddress: string;
-  phoneNumber: string;
-  subject: string;
-  message: string;
-}
-
-const EMAIL_ADDRESSES: string[] = [
-  'claudiaolaru15@gmail.com',
-  'mmmmmm@yahoo.com',
-];
-
-const PHONE_NUMBERS: string[] = ['752647392', '752647392'];
-
-const SUBJECTS: string[] = ['subiect', 'subiect2'];
-
-const MESSAGES: string[] = ['mesaj', 'mesaj2'];
+import { NotificationService } from '../../service/notification.service';
+import { AboutUsService } from '../../service/about-us.service';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'table-contact',
@@ -36,64 +36,73 @@ const MESSAGES: string[] = ['mesaj', 'mesaj2'];
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatIconModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatButtonModule,
+  ],
+
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
   ],
 })
-export class TableContactComponent {
-  displayedColumns: string[] = [
-    'id',
-    'emailAddress',
-    'phoneNumber',
-    'subject',
-    'message',
-  ];
-  dataSource: MatTableDataSource<UserData>;
+export class TableContactComponent implements OnInit {
+  notification = inject(NotificationService);
+  aboutUsService = inject(AboutUsService);
+  columnsToDisplay: string[] = ['email', 'phoneNumber', 'address', 'severity'];
+  columnNames: any = {
+    email: 'Email',
+    address: 'Adresa',
+    phoneNumber: 'Numar telefon',
+    severity: 'Severitate',
+    actions: 'Rezolvat',
+  };
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'actions', 'expand'];
+  dataSource!: MatTableDataSource<any>;
+  expandedElement: any;
 
-  constructor() {
-    const contact = EMAIL_ADDRESSES.map((EMAIL_ADDRESSES, index) =>
-      createContact(
-        index + 1,
-        EMAIL_ADDRESSES,
-        PHONE_NUMBERS[index],
-        SUBJECTS[index],
-        MESSAGES[index]
-      )
-    );
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-    this.dataSource = new MatTableDataSource(contact);
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  constructor() {}
+  ngOnInit(): void {
+    this.aboutUsService.contactCollection$.subscribe((contact) => {
+      this.dataSource = new MatTableDataSource(contact);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    console.log('filterValue', filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  async updateContact(element: any) {
+    if (!element) {
+      return;
+    }
+    try {
+      this.notification.showLoading();
+      await this.aboutUsService.updateContact({
+        ...element,
+        isAnswered: !element.isAnswered,
+      });
+
+      this.notification.success('Cererea a fost actualizata cu succes!');
+    } catch (error: any) {
+      this.notification.error(error.message);
+    } finally {
+      this.notification.hideLoading();
     }
   }
-}
-
-function createContact(
-  id: number,
-  adresaEmail: string,
-  numarTelefon: string,
-  subiect: string,
-  mesaj: string
-): UserData {
-  return {
-    id: id.toString(),
-    emailAddress: adresaEmail,
-    phoneNumber: numarTelefon,
-    subject: subiect,
-    message: mesaj,
-  };
 }

@@ -28,6 +28,7 @@ import { addDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NotificationService } from '../../service/notification.service';
 import { UsersService } from '../../service/users.service';
+import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -53,6 +54,8 @@ export class ProfileComponent {
   storage = inject(Storage);
   notifications = inject(NotificationService);
   userService = inject(UsersService);
+
+  authService = inject(AuthService);
   route = inject(ActivatedRoute);
   profileForm = this.fb.group({
     uid: [''],
@@ -111,6 +114,25 @@ export class ProfileComponent {
       this.notifications.error(
         'Imaginea utilizatorului nu a putut fi modificata!'
       );
+    } finally {
+      this.notifications.hideLoading();
+    }
+  }
+
+  async forgotPassword() {
+    const { email } = this.userService.currentUserProfile() ?? {};
+    if (!email) {
+      this.notifications.error('Introdu adresa ta de email');
+      return;
+    }
+    try {
+      this.notifications.showLoading();
+      await this.authService.passwordReset(email);
+      this.notifications.success(
+        'Link-ul pentru resetarea parolei a fost trimis'
+      );
+    } catch (error: any) {
+      this.notifications.error(error.message);
     } finally {
       this.notifications.hideLoading();
     }
