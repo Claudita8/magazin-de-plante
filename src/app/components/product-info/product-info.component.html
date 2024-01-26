@@ -1,1 +1,90 @@
-<p>product-info works!</p>
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ editProduct().name }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ editProduct().category }} | {{ editProduct().price }} RON
+      </mat-card-subtitle>
+      <mat-error>
+        {{
+          editProduct().stock === 0 ? "Nu este in stoc" : editProduct().stock
+        }}
+      </mat-error>
+    </mat-card-header>
+    <img [src]="editProduct().image" mat-card-image width="500" height="500" />
+    <mat-card-content>
+      <p>
+        {{ editProduct().description }}
+      </p>
+      <mat-divider> </mat-divider>
+      <p>
+        {{ editProduct().ghidDeIngrijire }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <form [formGroup]="quantityForm">
+        <mat-form-field>
+          <mat-label> Cantitate </mat-label>
+          <input
+            matInput
+            min="1"
+            max="50"
+            placeholder="Cantitate"
+            type="number"
+            formControlName="quantityForm"
+          />
+          <!-- <mat-error
+            *ngIf="quantityForm.controls.quantity.errors?.['required']"
+          >
+            Cantitatea este necesara
+          </mat-error> -->
+        </mat-form-field>
+      </form>
+      <button [disabled]="editProduct().stock === 0" mat-button>
+        <mat-icon>shopping_card</mat-icon> Adauga in cos
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <form [formGroup]="productInfoForm" (ngSubmit)="submit()">
+    <h1>Adauga feedback</h1>
+    <mat-form-field>
+      <mat-label> Feedback </mat-label>
+      <input
+        matInput
+        placeholder="Recenzie"
+        type="text"
+        formControlName="userFeedback"
+      />
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" class="margin-top">
+      Trimite
+    </button>
+  </form>
+</div>
+<div
+  *ngFor="let recenzieUser of feedbackInfo()[0]?.feedback"
+  class="margin-top"
+>
+  <mat-card class="margin-top"
+    ><mat-card-header
+      ><img
+        mat-card-avatar
+        [src]="recenzieUser.user.photoURL ?? '/assets/UserLogo.jpg'"
+      />
+      <mat-card-title>
+        {{ recenzieUser.user.displayName }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ recenzieUser.date }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{ recenzieUser.feedback }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <button mat-button color="warn">Sterge</button>
+</div>

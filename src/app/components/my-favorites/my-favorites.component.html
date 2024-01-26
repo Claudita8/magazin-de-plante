@@ -11,6 +11,9 @@
       <p>{{ product.price }} Ron</p>
     </mat-card-content>
     <mat-card-actions>
+      <button mat-button [routerLink]="'/product-info/' + product.id">
+        Vezi detalii
+      </button>
       <button mat-button style="background-color: green; color: white">
         Adauga in cos
       </button>

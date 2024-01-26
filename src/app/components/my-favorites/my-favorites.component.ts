@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductsService } from '../../service/products.service';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from '../product/product.components';
@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    RouterModule,
   ],
   templateUrl: './my-favorites.component.html',
   styleUrl: './my-favorites.component.scss',

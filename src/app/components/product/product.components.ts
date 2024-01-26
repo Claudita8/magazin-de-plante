@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'product',
   standalone: true,
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
-  imports: [MatCardModule, MatButtonModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, RouterModule],
 })
 export class ProductComponent {
   @Input()
