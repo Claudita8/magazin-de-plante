@@ -13,6 +13,8 @@ import { EditProductsComponent } from './components/table-products/edit-products
 import { editProductResolver } from './components/table-products/edit-products/edit-products.resolver';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { MyFavoritesComponent } from './components/my-favorites/my-favorites.component';
+
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['signin']); //De adaugat la fiecare ruta noua
 const redirectLoggedInToLanding = () => redirectLoggedInTo(['']);
 export const routes: Routes = [
@@ -56,6 +58,11 @@ export const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'my-favorites',
+    component: MyFavoritesComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
 ];

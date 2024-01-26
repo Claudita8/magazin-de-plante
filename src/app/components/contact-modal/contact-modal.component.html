@@ -6,7 +6,7 @@
     [formGroup]="contactForm"
     (ngSubmit)="submit(contactCollection.length + 1)"
   >
-    <h1>Scrie-ne</h1>
+    <h1>Contacteaza-ne</h1>
     <mat-form-field>
       <mat-label> Motivul: </mat-label>
       <textarea
@@ -27,5 +27,7 @@
       Trimite
     </button>
   </form>
-  <button mat-button (click)="dialog.close()">Inchide</button>
+  <button mat-icon-button class="close-button" (click)="dialog.close()">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>

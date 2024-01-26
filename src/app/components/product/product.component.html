@@ -8,12 +8,10 @@
     <button mat-button style="background-color: green; color: white">
       Adauga in cos
     </button>
-    <button mat-button>
-      <mat-icon
-        aria-hidden="false"
-        aria-label="Example home icon"
-        fontIcon="favorite_border"
-      ></mat-icon>
+    <button mat-button (click)="toggleFavorites(product)">
+      <mat-icon>{{
+        isFavorites(product) ? "favorite" : "favorite_border"
+      }}</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

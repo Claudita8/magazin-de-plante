@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NotificationService } from '../../service/notification.service';
 import { AboutUsService } from '../../service/about-us.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 import {
   animate,
   state,
@@ -23,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'table-contact',
@@ -31,6 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
 
   imports: [
+    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
@@ -40,6 +44,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCheckboxModule,
     FormsModule,
     MatButtonModule,
+    MatDatepickerModule,
   ],
 
   animations: [
@@ -62,10 +67,16 @@ export class TableContactComponent implements OnInit {
     address: 'Adresa',
     phoneNumber: 'Numar telefon',
     severity: 'Severitate',
+    date: 'Data',
     actions: 'Rezolvat',
   };
 
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'actions', 'expand'];
+  columnsToDisplayWithExpand = [
+    ...this.columnsToDisplay,
+    'date',
+    'actions',
+    'expand',
+  ];
   dataSource!: MatTableDataSource<any>;
   expandedElement: any;
 

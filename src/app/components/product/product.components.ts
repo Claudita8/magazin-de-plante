@@ -13,4 +13,20 @@ import { MatIconModule } from '@angular/material/icon';
 export class ProductComponent {
   @Input()
   product!: any;
+
+  favorites: any = {};
+
+  constructor() {
+    const favorites = localStorage.getItem('favorites');
+    this.favorites = favorites ? JSON.parse(favorites) : {};
+  }
+
+  toggleFavorites(product: any) {
+    this.favorites[product.id] = !this.favorites[product.id];
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  }
+
+  isFavorites(product: any) {
+    return this.favorites[product.id];
+  }
 }

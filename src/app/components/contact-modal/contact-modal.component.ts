@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NotificationService } from '../../service/notification.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AboutUsService } from '../../service/about-us.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-contact-modal',
@@ -17,6 +18,7 @@ import { AboutUsService } from '../../service/about-us.service';
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatIconModule,
   ],
   templateUrl: './contact-modal.component.html',
   styleUrl: './contact-modal.component.scss',

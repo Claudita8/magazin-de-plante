@@ -8,6 +8,27 @@
   </p>
 </div>
 
+<p class="text">Incercati noile produse de la Atelierul Verde</p>
+
+<div style="text-align: center; display: flex; justify-content: space-between">
+  <div style="max-width: 48%">
+    <img src="assets/BradArtificial.jpg" alt="Brad1" style="max-width: 50%" />
+  </div>
+
+  <!-- <div style="max-width: 48%; position: relative">
+    <p class="text-container">
+      Nu
+      <br />
+      rata
+      <br />
+      noile oferte
+    </p> -->
+
+  <div style="max-width: 48%">
+    <img src="assets/BradCraciun.jpg" alt="Brad2" style="max-width: 50%" />
+  </div>
+</div>
+
 <mat-accordion>
   <mat-expansion-panel
     (opened)="panelOpenState = true"
@@ -15,9 +36,7 @@
   >
     <mat-expansion-panel-header>
       <mat-panel-title> Cine suntem? </mat-panel-title>
-      <mat-panel-description>
-        <!-- {{ panelOpenState ? "open" : "closed" }} -->
-      </mat-panel-description>
+      <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
       Atelierul Verde este gestionat de către AGRO DENMAR SRL, un producător
@@ -35,9 +54,7 @@
   >
     <mat-expansion-panel-header>
       <mat-panel-title> Ce oferim? </mat-panel-title>
-      <mat-panel-description>
-        <!-- {{ panelOpenState ? "open" : "closed" }} -->
-      </mat-panel-description>
+      <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
       La Atelierul Verde, vă punem la dispoziție o selecție diversificată de
@@ -52,9 +69,7 @@
   >
     <mat-expansion-panel-header>
       <mat-panel-title>Calitate certificată </mat-panel-title>
-      <mat-panel-description>
-        <!-- {{ panelOpenState ? "open" : "closed" }} -->
-      </mat-panel-description>
+      <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
       Pepiniera noastră este autorizată de către ITCSMS (Inspectoratul
@@ -71,9 +86,7 @@
   >
     <mat-expansion-panel-header>
       <mat-panel-title> Experiență cu Atelierul Verde </mat-panel-title>
-      <mat-panel-description>
-        <!-- {{ panelOpenState ? "open" : "closed" }} -->
-      </mat-panel-description>
+      <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
       Clienții noștri nu primesc doar plante de excepție. La Atelierul Verde,
@@ -84,5 +97,5 @@
       într-o oază de frumusețe și prospețime cu plantele de la Atelierul Verde!
     </p>
   </mat-expansion-panel>
-  <button (click)="openModal()">Scrie-ne</button>
+  <button (click)="openModal()" mat-raised-button>Contacteaza-ne</button>
 </mat-accordion>

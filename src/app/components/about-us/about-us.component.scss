@@ -1,5 +1,26 @@
 button {
-  font-size: 20px;
+  font-size: 30px;
   margin: 0 auto;
   display: block;
 }
+
+.text {
+  text-align: center;
+  margin-top: 5px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: black;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px darkgreen;
+}
+
+// .text-container {
+//   text-align: center;
+//   margin-top: 10px;
+//   font-family: "Comic Sans MS", cursive, sans-serif;
+//   color: black;
+//   font-weight: bold;
+//   text-shadow: 2px 2px 4px darkgreen;
+//   background-color: white;
+//   padding: 10px;
+//   border-radius: 5px;
+// }
