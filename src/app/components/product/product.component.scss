@@ -3,9 +3,33 @@
   border-style: solid;
   border-color: black;
   box-shadow: 2px;
-  .img {
-    object-fit: cover;
-    width: 223px;
-    height: 195px;
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.mat-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.img {
+  object-fit: cover;
+  width: 223px;
+  height: 223px;
+  align-self: flex-start;
+}
+
+.info {
+  text-align: center;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: auto;
+  align-self: center;
 }

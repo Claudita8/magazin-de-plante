@@ -1,5 +1,7 @@
 <div>
   <mat-card>
+    <img [src]="editProduct().image" mat-card-image width="500" height="500" />
+
     <mat-card-header>
       <mat-card-title>
         {{ editProduct().name }}
@@ -7,13 +9,14 @@
       <mat-card-subtitle>
         {{ editProduct().category }} | {{ editProduct().price }} RON
       </mat-card-subtitle>
+      Stoc:
       <mat-error>
         {{
           editProduct().stock === 0 ? "Nu este in stoc" : editProduct().stock
         }}
       </mat-error>
     </mat-card-header>
-    <img [src]="editProduct().image" mat-card-image width="500" height="500" />
+
     <mat-card-content>
       <p>
         {{ editProduct().description }}
@@ -23,6 +26,7 @@
         {{ editProduct().ghidDeIngrijire }}
       </p>
     </mat-card-content>
+
     <mat-card-actions>
       <form [formGroup]="quantityForm">
         <mat-form-field>
@@ -47,6 +51,9 @@
       </button>
     </mat-card-actions>
   </mat-card>
+</div>
+
+<div>
   <form [formGroup]="productInfoForm" (ngSubmit)="submit()">
     <h1>Adauga feedback</h1>
     <mat-form-field>
@@ -63,6 +70,7 @@
     </button>
   </form>
 </div>
+
 <div
   *ngFor="let recenzieUser of feedbackInfo()[0]?.feedback"
   class="margin-top"

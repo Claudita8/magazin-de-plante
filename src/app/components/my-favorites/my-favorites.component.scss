@@ -1,0 +1,60 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  text-align: center;
+}
+
+h1 {
+  width: 100%;
+}
+
+.product-card {
+  width: calc(25% - 20px);
+  max-width: 500px;
+  height: 420px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .product-card {
+    width: calc(50% - 20px);
+  }
+}
+
+.card-container::after {
+  content: "";
+  flex-grow: 9999;
+}
+
+.mat-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.img {
+  object-fit: cover;
+  max-width: 300px;
+  max-height: 300px;
+  width: 223px;
+  height: 223px;
+  align-self: flex-start;
+}
+
+.info {
+  text-align: center;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: auto;
+  align-self: center;
+}

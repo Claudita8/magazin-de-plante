@@ -1,10 +1,12 @@
 <mat-card class="product-card">
   <mat-card-content>
     <img class="img" [src]="product.image" />
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.price }} Ron</p>
+    <div class="info">
+      <h1>{{ product.name }}</h1>
+      <p>{{ product.price }} Ron</p>
+    </div>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions class="actions">
     <button mat-button [routerLink]="'product-info/' + product.id">
       Vezi detalii
     </button>
