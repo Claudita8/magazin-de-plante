@@ -1,98 +1,124 @@
-<div>
-  <mat-card>
+<div style="margin: 20px">
+  <div style="display: flex; flex-direction: row">
     <img [src]="editProduct().image" mat-card-image width="500" height="500" />
 
-    <mat-card-header>
-      <mat-card-title>
-        {{ editProduct().name }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ editProduct().category }} | {{ editProduct().price }} RON
-      </mat-card-subtitle>
-      Stoc:
-      <mat-error>
-        {{
-          editProduct().stock === 0 ? "Nu este in stoc" : editProduct().stock
-        }}
-      </mat-error>
-    </mat-card-header>
+    <mat-card class="content">
+      <div class="head-body">
+        <mat-card-header style="display: flex; flex-direction: column">
+          <div>
+            <h1>{{ editProduct().name }}</h1>
+          </div>
+          <div>Categorie: {{ editProduct().category }}</div>
+          <br />
+          <div>Pret: {{ editProduct().price }} RON</div>
+          <br />
+          <div style="display: flex; flex-direction: row">
+            Stoc:
+            <mat-error>
+              {{
+                editProduct().stock === 0
+                  ? "Nu este in stoc"
+                  : editProduct().stock
+              }}
+            </mat-error>
+            <br />
+            <br />
+          </div>
+        </mat-card-header>
+        <mat-divider> </mat-divider>
+        <mat-card-content>
+          <h3>Descriere:</h3>
+          <p>
+            {{ editProduct().description }}
+          </p>
+          <mat-divider> </mat-divider>
+          <h3>Ghid de ingrijire:</h3>
+          <p>
+            {{ editProduct().ghidDeIngrijire }}
+          </p>
+        </mat-card-content>
+      </div>
 
-    <mat-card-content>
-      <p>
-        {{ editProduct().description }}
-      </p>
-      <mat-divider> </mat-divider>
-      <p>
-        {{ editProduct().ghidDeIngrijire }}
-      </p>
-    </mat-card-content>
-
-    <mat-card-actions>
-      <form [formGroup]="quantityForm">
-        <mat-form-field>
-          <mat-label> Cantitate </mat-label>
-          <input
-            matInput
-            min="1"
-            max="50"
-            placeholder="Cantitate"
-            type="number"
-            formControlName="quantityForm"
-          />
-          <!-- <mat-error
+      <mat-card-actions class="content-actions">
+        <form [formGroup]="quantityForm">
+          <mat-form-field>
+            <mat-label> Cantitate </mat-label>
+            <input
+              matInput
+              min="1"
+              max="50"
+              placeholder="Cantitate"
+              type="number"
+              formControlName="quantityForm"
+            />
+            <!-- <mat-error
             *ngIf="quantityForm.controls.quantity.errors?.['required']"
           >
             Cantitatea este necesara
           </mat-error> -->
-        </mat-form-field>
-      </form>
-      <button [disabled]="editProduct().stock === 0" mat-button>
-        <mat-icon>shopping_card</mat-icon> Adauga in cos
+          </mat-form-field>
+        </form>
+        <button
+          [disabled]="editProduct().stock === 0"
+          mat-button
+          class="add-to-cart"
+        >
+          <mat-icon>shopping_card</mat-icon> Adauga in cos
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div>
+    <h2>Adauga feedback</h2>
+    <form
+      [formGroup]="productInfoForm"
+      (ngSubmit)="submit()"
+      style="display: flex; flex-direction: row"
+    >
+      <mat-form-field style="margin-right: 15px">
+        <mat-label> Feedback </mat-label>
+        <input
+          matInput
+          placeholder="Recenzie"
+          type="text"
+          formControlName="userFeedback"
+        />
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        style="margin: auto"
+      >
+        Trimite
       </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+    </form>
+  </div>
 
-<div>
-  <form [formGroup]="productInfoForm" (ngSubmit)="submit()">
-    <h1>Adauga feedback</h1>
-    <mat-form-field>
-      <mat-label> Feedback </mat-label>
-      <input
-        matInput
-        placeholder="Recenzie"
-        type="text"
-        formControlName="userFeedback"
-      />
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" class="margin-top">
-      Trimite
-    </button>
-  </form>
-</div>
+  <div *ngFor="let recenzieUser of feedbackInfo()[0]?.feedback">
+    <mat-card class="margin-top">
+      <mat-card-header style="justify-content: space-between">
+        <img
+          mat-card-avatar
+          [src]="recenzieUser.user.photoURL ?? '/assets/UserLogo.jpg'"
+        />
+        <mat-card-title>
+          {{ recenzieUser.user.displayName }}
+        </mat-card-title>
+        <mat-card-subtitle style="display: flex; flex-direction: row">
+          {{ recenzieUser.date }}
+        </mat-card-subtitle>
+        <button class="delete-feedback" mat-button>Sterge</button>
+      </mat-card-header>
+      <br />
+      <mat-divider></mat-divider>
 
-<div
-  *ngFor="let recenzieUser of feedbackInfo()[0]?.feedback"
-  class="margin-top"
->
-  <mat-card class="margin-top"
-    ><mat-card-header
-      ><img
-        mat-card-avatar
-        [src]="recenzieUser.user.photoURL ?? '/assets/UserLogo.jpg'"
-      />
-      <mat-card-title>
-        {{ recenzieUser.user.displayName }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ recenzieUser.date }}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        {{ recenzieUser.feedback }}
-      </p>
-    </mat-card-content>
-  </mat-card>
-  <button mat-button color="warn">Sterge</button>
+      <mat-card-content>
+        <p>
+          {{ recenzieUser.feedback }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

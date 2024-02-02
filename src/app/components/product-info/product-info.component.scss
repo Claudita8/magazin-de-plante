@@ -1,0 +1,33 @@
+img {
+  display: flex;
+  align-self: left;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.head-body {
+  flex-direction: column;
+  width: 600px;
+}
+
+.content-actions {
+  flex-direction: column;
+  align-self: center;
+  margin-left: 100px;
+}
+
+.add-to-cart {
+  background-color: green;
+  color: white;
+}
+
+.delete-feedback {
+  display: flex;
+  background-color: red;
+  color: white;
+  margin-left: auto;
+}
