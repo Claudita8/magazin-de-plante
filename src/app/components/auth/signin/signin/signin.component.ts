@@ -38,6 +38,12 @@ export class SigninComponent {
   email = this.signInForm.get('email');
   password = this.signInForm.get('password');
 
+  public showPassword: boolean = false;
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
   async submit() {
     const { email, password } = this.signInForm.value;
     if (!this.signInForm.valid || !email || !password) {

@@ -3,7 +3,7 @@
   <form [formGroup]="signInForm" (ngSubmit)="submit()">
     <mat-form-field>
       <mat-label> Adresa email </mat-label>
-      <input matInput placeholder="Nume" type="email" formControlName="email" />
+      <input matInput placeholder="" type="email" formControlName="email" />
       <mat-error *ngIf="email?.hasError('required')">
         Numele este necesar sa fie introdus
       </mat-error>
@@ -15,11 +15,16 @@
       <mat-label> Parola </mat-label>
       <input
         matInput
-        placeholder="Nume"
-        type="password"
+        placeholder=""
+        [type]="showPassword ? 'text' : 'password'"
         formControlName="password"
         name="password"
       />
+
+      <mat-icon matSuffix (click)="togglePasswordVisibility()">
+        {{ showPassword ? "visibility" : "visibility_off" }}
+      </mat-icon>
+
       <mat-error *ngIf="password?.hasError('required')">
         Parola nu este introdusa
       </mat-error>
@@ -30,7 +35,7 @@
         mat-stroked-button
         color="primary"
         type="submit"
-        style="background-color: rgb(0, 125, 250); color: white"
+        style="background-color: rgb(6, 146, 36); color: white"
       >
         Intra in cont
       </button>
@@ -38,11 +43,19 @@
         <button
           mat-stroked-button
           routerLink="/signup"
-          style="background-color: rgb(71, 163, 255); color: white"
+          style="
+            background-color: rgb(71, 163, 255);
+            color: white;
+            margin-right: 15px;
+          "
         >
           Creeaza un cont nou
         </button>
-        <button mat-stroked-button (click)="forgotPassword()">
+        <button
+          mat-stroked-button
+          (click)="forgotPassword()"
+          style="background-color: rgb(91, 135, 179); color: white"
+        >
           Ai uitat parola?
         </button>
       </div>
