@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" *ngIf="authService.currentUser()">
-  <div>
+  <div class="logo">
     <img [src]="'/assets/LogoApp.jpg'" width="50" height="50" />
   </div>
 
@@ -10,6 +10,40 @@
   </div>
 
   <div>
+    <div>
+      <mat-icon
+        matBadge="warn"
+        [matBadge]="getCartItems()"
+        [mat-menu-trigger-for]="cartProducts"
+      >
+        shopping_cart</mat-icon
+      >
+    </div>
+    <mat-menu #cartProducts="matMenu">
+      <div *ngFor="let item of currentUser().cart.cartItems">
+        <button mat-menu-item [routerLink]="'/product-info/' + item.id">
+          <mat-icon> shopping_cart </mat-icon> {{ item.name }} x
+          {{ item.quantity }}
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="removeItemFromCart($event, item)"
+        >
+          Elimina
+        </button>
+      </div>
+      <ng-container *ngIf="currentUser()?.cart?.cartItems.length === 0">
+        Nu aveti produse in cos
+      </ng-container>
+      <mat-divider> </mat-divider>
+      <p *ngIf="currentUser()?.cart?.cartItems.length !== 0">
+        Total: <strong>{{ getTotalPrice().toFixed(2) }} RON</strong>
+      </p>
+    </mat-menu>
+  </div>
+
+  <div class="account">
     <button mat-button [matMenuTriggerFor]="menu">
       {{ currentUser()?.email }}<mat-icon>expand_more</mat-icon>
     </button>
@@ -31,12 +65,11 @@
         Logout
       </button>
     </mat-menu>
-    <!-- <button mat-button (click)="logout()">
-      <mat-icon>logout</mat-icon>Deconectare
-    </button> -->
   </div>
 </mat-toolbar>
+
 <router-outlet></router-outlet>
+
 <mat-progress-spinner
   *ngIf="loading()"
   mode="indeterminate"

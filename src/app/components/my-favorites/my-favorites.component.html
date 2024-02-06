@@ -1,7 +1,7 @@
 <div class="card-container">
   <h1>Produse favorite</h1>
   <ng-container *ngIf="favoriteProducts.length === 0">
-    <p>Nu ai produse favorite</p>
+    <h1 style="color: red">Nu ai produse favorite</h1>
   </ng-container>
   @for(product of favoriteProducts; track product.id) {
   <mat-card class="product-card">
@@ -13,7 +13,11 @@
       </div>
     </mat-card-content>
     <mat-card-actions class="actions">
-      <button mat-button [routerLink]="'/product-info/' + product.id">
+      <button
+        style="background-color: lightgreen; margin-right: 5px"
+        mat-button
+        [routerLink]="'/product-info/' + product.id"
+      >
         Vezi detalii
       </button>
       <button mat-button style="background-color: green; color: white">

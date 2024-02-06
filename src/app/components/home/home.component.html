@@ -1,10 +1,34 @@
-
 <div class="card-container">
-  @for(product of data(); track product.id) {
-  <div class="card">
-    <product [product]="product"></product>
+  <div *ngFor="let product of productsService.products()">
+    <mat-card class="product-card">
+      <mat-card-content>
+        <img class="img" [src]="product['image']" />
+        <div class="info">
+          <h1>{{ product["name"] }}</h1>
+          <p>{{ product["price"] }} Ron</p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="actions">
+        <button
+          style="background-color: lightgreen; margin-right: 5px"
+          mat-button
+          [routerLink]="'product-info/' + product['id']"
+        >
+          Vezi detalii
+        </button>
+        <button
+          mat-button
+          style="background-color: green; color: white"
+          (click)="addToCart(product)"
+        >
+          Adauga in cos
+        </button>
+        <button mat-button (click)="toggleFavorites(product)">
+          <mat-icon>{{
+            isFavorites(product) ? "favorite" : "favorite_border"
+          }}</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
-  }
 </div>
-
-

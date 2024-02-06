@@ -96,4 +96,53 @@ export class ProductInfoComponent implements OnInit {
       this.notificationService.hideLoading();
     }
   }
+
+  async addToCart() {
+    const isNotInStock = this.quantityForm.value.quantity
+      ? this.quantityForm?.value?.quantity > this.editProduct()?.stock
+      : false;
+    console.log(isNotInStock);
+    if (this.quantityForm.invalid || isNotInStock) {
+      this.notificationService.error('Cantitatea nu este in stoc');
+      return;
+    }
+
+    const itemToCart = {
+      ...this.editProduct(),
+      quantity: this.quantityForm.value.quantity,
+    };
+
+    const newStock = this.editProduct().stock - itemToCart.quantity;
+    try {
+      this.notificationService.showLoading();
+      await this.productsService.updateProduct({
+        ...this.editProduct(),
+        stock: newStock,
+      });
+
+      const userProfile = this.userService.currentUserProfile();
+
+      if (!userProfile.cart) {
+        userProfile.cart = {
+          cartItems: [],
+        };
+      }
+
+      const exisitingCartItems = userProfile.cart.cartItems.find(
+        (items: any) => items.id === itemToCart.id
+      );
+
+      if (exisitingCartItems) {
+        exisitingCartItems.quantity += itemToCart.quantity;
+      } else {
+        userProfile.cart.cartItems.push(itemToCart);
+      }
+      await this.userService.updateUser(userProfile);
+
+      this.notificationService.success('Produsul a fost adaugat cu succes');
+    } catch (error: any) {
+    } finally {
+      this.notificationService.hideLoading();
+    }
+  }
 }

@@ -7,10 +7,18 @@
     </div>
   </mat-card-content>
   <mat-card-actions class="actions">
-    <button mat-button [routerLink]="'product-info/' + product.id">
+    <button
+      style="background-color: lightgreen; margin-right: 5px"
+      mat-button
+      [routerLink]="'product-info/' + product.id"
+    >
       Vezi detalii
     </button>
-    <button mat-button style="background-color: green; color: white">
+    <button
+      mat-button
+      style="background-color: green; color: white"
+      (click)="addToCart(product)"
+    >
       Adauga in cos
     </button>
     <button mat-button (click)="toggleFavorites(product)">

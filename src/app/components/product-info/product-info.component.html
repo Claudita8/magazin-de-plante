@@ -49,7 +49,7 @@
               max="50"
               placeholder="Cantitate"
               type="number"
-              formControlName="quantityForm"
+              formControlName="quantity"
             />
             <!-- <mat-error
             *ngIf="quantityForm.controls.quantity.errors?.['required']"
@@ -59,6 +59,7 @@
           </mat-form-field>
         </form>
         <button
+          (click)="addToCart()"
           [disabled]="editProduct().stock === 0"
           mat-button
           class="add-to-cart"
