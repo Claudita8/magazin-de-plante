@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
+
 import {
   Storage,
   getDownloadURL,
@@ -25,7 +26,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'home',
@@ -43,6 +45,8 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     MatIconModule,
     RouterModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
 })
 export class HomeComponent {
@@ -52,6 +56,7 @@ export class HomeComponent {
   currentUser = this.userService.currentUserProfile;
   notificationService = inject(NotificationService);
   productsService = inject(ProductsService);
+searchQuery: any;
 
   ngOnInit(): void {
     combineLatest([

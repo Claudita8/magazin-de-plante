@@ -20,7 +20,7 @@
       >
     </div>
     <mat-menu #cartProducts="matMenu">
-      <div *ngFor="let item of currentUser().cart.cartItems">
+      <div *ngFor="let item of currentUser()?.cart?.cartItems">
         <button mat-menu-item [routerLink]="'/product-info/' + item.id">
           <mat-icon> shopping_cart </mat-icon> {{ item.name }} x
           {{ item.quantity }}
@@ -37,8 +37,20 @@
         Nu aveti produse in cos
       </ng-container>
       <mat-divider> </mat-divider>
-      <p *ngIf="currentUser()?.cart?.cartItems.length !== 0">
+      <!-- <p *ngIf="currentUser()?.cart?.cartItems.length !== 0">
         Total: <strong>{{ getTotalPrice().toFixed(2) }} RON</strong>
+      </p> -->
+
+      <p *ngIf="currentUser()?.cart?.cartItems.length !== 0">
+        Total:
+        <strong
+          >{{
+            getTotalPrice() !== undefined
+              ? getTotalPrice().toFixed(2)
+              : "Not available"
+          }}
+          RON</strong
+        >
       </p>
     </mat-menu>
   </div>
