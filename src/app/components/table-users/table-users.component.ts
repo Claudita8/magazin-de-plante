@@ -27,6 +27,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { UserListService } from '../../service/user-list.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'table-users',
@@ -101,5 +102,33 @@ export class TableUsersComponent implements OnInit {
 
   onAdminToggleChange(userId: string, event: MatSlideToggleChange) {
     this.usertListService.updateUser(userId, event.checked);
+  }
+
+  fileName = 'users.xlsx';
+  exportExcel() {
+    let data = this.dataSource.data.map((users) => {
+      return [
+        users.email,
+        users.isAdmin || false,
+        users.lastName,
+        users.firstName,
+        users.displayName,
+        users.phoneNumber,
+        users.address,
+      ];
+    });
+    data.unshift([
+      'Email',
+      'Este Admin',
+      'Nume de familie',
+      'Prenume',
+      'Porecla',
+      'Numar de telefon',
+      'Adresa',
+    ]);
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Users');
+    XLSX.writeFile(wb, this.fileName);
   }
 }

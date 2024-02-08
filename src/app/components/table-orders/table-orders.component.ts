@@ -4,6 +4,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+// import * as XLSX from 'xlsx';
 
 export interface UserData {
   id: string;
@@ -102,4 +103,26 @@ function createNewOrder(
     pretTotal: pretTot,
     produseComandate: produseComandate,
   };
+
+  // fileName = 'orders.xlsx';
+  // exportExcel() {
+  //   let data = this.dataSource.data.map((orders) => {
+  //     return [
+  //       orders.name,
+       
+  //     ];
+  //   });
+  //   data.unshift([
+  //     'Nume',
+  //     'Pret',
+  //     'Cantitate',
+  //     'Categorie',
+  //     'Descriere',
+  //     'Ghid de ingrijire',
+  //   ]);
+  //   const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+  //   const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(wb, ws, 'Produse'); // de schiimbat din prod in alta denumire
+  //   XLSX.writeFile(wb, this.fileName);
+  // }
 }

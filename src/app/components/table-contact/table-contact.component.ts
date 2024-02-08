@@ -26,6 +26,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'table-contact',
@@ -115,5 +116,37 @@ export class TableContactComponent implements OnInit {
     } finally {
       this.notification.hideLoading();
     }
+  }
+
+  fileName = 'contact.xlsx';
+  exportExcel() {
+    let data = this.dataSource.data.map((contact) => {
+      return [
+        contact.email,
+        contact.phoneNumber,
+        contact.address,
+        contact.date,
+        contact.lastName,
+        contact.firstName,
+        contact.displayName,
+        contact.reason,
+        contact.severity,
+      ];
+    });
+    data.unshift([
+      'Email',
+      'Numar de telefon',
+      'Adresa',
+      'Data',
+      'Nume de familie',
+      'Prenume',
+      'Porecla',
+      'Motiv',
+      'Nivel de severitate',
+    ]);
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Contact'); // de schiimbat din prod in alta denumire
+    XLSX.writeFile(wb, this.fileName);
   }
 }
