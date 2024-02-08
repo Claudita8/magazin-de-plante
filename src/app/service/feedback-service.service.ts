@@ -8,6 +8,7 @@ import {
   deleteDoc,
   doc,
   docData,
+  docSnapshots,
   getDocs,
   updateDoc,
 } from '@angular/fire/firestore';
@@ -42,5 +43,33 @@ export class FeedbackServiceService {
     if (!productFound) {
       return addDoc(this.firestoreCollection$, recenzie);
     }
+  }
+
+  async removeComment(recenzie: any): Promise<any> {
+    const productSnapshot = await getDocs(this.firestoreCollection$);
+
+    productSnapshot.forEach((docSnapshot: any) => {
+      if (docSnapshot.data()['id'] === recenzie.id) {
+        const ref = doc(this.firestore, 'feedback', docSnapshot.id);
+        const feedback = docSnapshot.data()['feedback'];
+        const removedFeedback = feedback.filter(
+          (feedback: any) => feedback.date !== recenzie.date
+        );
+        return updateDoc(ref, { feedback: removedFeedback });
+      }
+      return;
+    });
+  }
+
+  async deleteFeedback(recenzie: any): Promise<any> {
+    const productSnapshot = await getDocs(this.firestoreCollection$);
+
+    productSnapshot.forEach((docSnapshot: any) => {
+      if (docSnapshot.data()['id'] === recenzie.id) {
+        const ref = doc(this.firestore, 'feedback', docSnapshot.id);
+        return deleteDoc(ref);
+      }
+      return;
+    });
   }
 }

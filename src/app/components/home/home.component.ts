@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -56,7 +56,24 @@ export class HomeComponent {
   currentUser = this.userService.currentUserProfile;
   notificationService = inject(NotificationService);
   productsService = inject(ProductsService);
-searchQuery: any;
+  searchQuery = signal('');
+
+  onChange(event: any) {
+    this.searchQuery.set(event);
+  }
+  searchProducts = computed(() => {
+    const searchTerm = this.searchQuery();
+    const products = this.productsService.products();
+    if (!searchTerm) {
+      return products;
+    }
+    return products?.filter((product: any) => {
+      const productName = product.name.toLowerCase();
+      const searchTermLower = searchTerm.toLowerCase();
+      console.log(productName.includes(searchTermLower));
+      return productName.includes(searchTermLower);
+    });
+  });
 
   ngOnInit(): void {
     combineLatest([

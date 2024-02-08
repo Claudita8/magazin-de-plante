@@ -20,7 +20,11 @@
       >
         Vezi detalii
       </button>
-      <button mat-button style="background-color: green; color: white">
+      <button
+        mat-button
+        style="background-color: green; color: white"
+        (click)="addToCart(product)"
+      >
         Adauga in cos
       </button>
       <button mat-button (click)="toggleFavorites(product)">

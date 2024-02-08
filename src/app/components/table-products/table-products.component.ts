@@ -23,7 +23,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { DeleteProductsComponent } from './delete-products/delete-products.component';
-
+import * as XLSX from 'xlsx';
+import { FeedbackServiceService } from '../../service/feedback-service.service';
 @Component({
   selector: 'table-products',
   styleUrls: ['./table-products.component.scss'],
@@ -56,6 +57,7 @@ export class TableProductsComponent implements OnInit {
   productService = inject(ProductsService);
   notification = inject(NotificationService);
   dialog = inject(MatDialog);
+  feedbackService = inject(FeedbackServiceService);
   columnsToDisplay: string[] = ['name', 'price', 'stock', 'category'];
   columnNames: any = {
     name: 'Denumire Produs',
@@ -98,6 +100,7 @@ export class TableProductsComponent implements OnInit {
         try {
           this.notification.showLoading();
           this.productService.deleteProduct(product);
+          this.feedbackService.deleteFeedback(product);
           this.notification.success('Produsul a fost sters cu succes!');
         } catch (error: any) {
           this.notification.error(error.message);
@@ -107,4 +110,33 @@ export class TableProductsComponent implements OnInit {
       }
     });
   }
+
+  fileName = 'produse.xlsx';
+  exportExcel() {
+    let data = this.dataSource.data.map((product) => {
+      return [
+        product.name,
+        product.price + ' RON',
+        product.stock,
+        product.category,
+        product.description,
+        product.ghidDeIngrijire,
+      ];
+    });
+    data.unshift([
+      'Nume',
+      'Pret',
+      'Cantitate',
+      'Categorie',
+      'Descriere',
+      'Ghid de ingrijire',
+    ]);
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Produse'); // de schiimbat din prod in alta denumire
+    XLSX.writeFile(wb, this.fileName);
+  }
+
+  //De facut importul cu *, de scris in let data proprietatile cum sunt in firebase, in data un unshift - de pus coloanele in ordine, de schimbat numele fileName
+  //ex: users.xlsx
 }

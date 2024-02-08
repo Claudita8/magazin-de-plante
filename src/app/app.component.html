@@ -33,15 +33,12 @@
           Elimina
         </button>
       </div>
-      <ng-container *ngIf="currentUser()?.cart?.cartItems.length === 0">
+      <ng-container *ngIf="currentUser()?.cart?.cartItems?.length === 0">
         Nu aveti produse in cos
       </ng-container>
       <mat-divider> </mat-divider>
-      <!-- <p *ngIf="currentUser()?.cart?.cartItems.length !== 0">
-        Total: <strong>{{ getTotalPrice().toFixed(2) }} RON</strong>
-      </p> -->
 
-      <p *ngIf="currentUser()?.cart?.cartItems.length !== 0">
+      <p *ngIf="currentUser()?.cart?.cartItems?.length !== 0">
         Total:
         <strong
           >{{

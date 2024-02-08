@@ -12,6 +12,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { FeedbackServiceService } from '../../service/feedback-service.service';
 import { map } from 'rxjs';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DeleteFeedbacksComponent } from './delete-feedback.component';
+import { StockMessage } from '../../pipes/stock-message.pipe';
 
 @Component({
   selector: 'app-product-info',
@@ -24,6 +27,9 @@ import { map } from 'rxjs';
     MatCardModule,
     MatDividerModule,
     MatIconModule,
+    MatDialogModule,
+    DeleteFeedbacksComponent,
+    StockMessage,
   ],
   templateUrl: './product-info.component.html',
   styleUrl: './product-info.component.scss',
@@ -34,9 +40,11 @@ export class ProductInfoComponent implements OnInit {
   productsService = inject(ProductsService);
   feedbackService = inject(FeedbackServiceService);
   userService = inject(UsersService);
+  currentUser = this.userService.currentUserProfile;
   notificationService = inject(NotificationService);
   route = inject(ActivatedRoute);
   fb = inject(FormBuilder);
+  dialog = inject(MatDialog);
 
   quantityForm = this.fb.group({
     quantity: [1, Validators.required],
@@ -144,5 +152,28 @@ export class ProductInfoComponent implements OnInit {
     } finally {
       this.notificationService.hideLoading();
     }
+  }
+  async deleteComment(recenzie: any) {
+    const dialogRef = this.dialog.open(DeleteFeedbacksComponent, {
+      data: {
+        message: 'Esti sigur ca vrei sa stergi comentariul?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'yes') {
+        try {
+          this.notificationService.showLoading();
+          this.feedbackService.removeComment(recenzie);
+          this.notificationService.success(
+            'Comentariul a fost sters cu succes!'
+          );
+        } catch (error: any) {
+          this.notificationService.error(error.message);
+        } finally {
+          this.notificationService.hideLoading();
+        }
+      }
+    });
   }
 }

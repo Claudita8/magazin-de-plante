@@ -14,13 +14,7 @@
           <br />
           <div style="display: flex; flex-direction: row">
             Stoc:
-            <mat-error>
-              {{
-                editProduct().stock === 0
-                  ? "Nu este in stoc"
-                  : editProduct().stock
-              }}
-            </mat-error>
+            <mat-error> {{ editProduct().stock | stockMessage }}</mat-error>
             <br />
             <br />
           </div>
@@ -110,7 +104,14 @@
         <mat-card-subtitle style="display: flex; flex-direction: row">
           {{ recenzieUser.date }}
         </mat-card-subtitle>
-        <button class="delete-feedback" mat-button>Sterge</button>
+        <button
+          class="delete-feedback"
+          mat-button
+          (click)="deleteComment(recenzieUser)"
+          *ngIf="currentUser()?.isAdmin"
+        >
+          Sterge
+        </button>
       </mat-card-header>
       <br />
       <mat-divider></mat-divider>

@@ -1,22 +1,18 @@
-<!-- <mat-form-field class="search-field">
+<mat-form-field>
   <input
     type="text"
     matInput
-    placeholder="Caută produse"
-    [(ngModel)]="searchQuery"
+    placeholder="Search"
+    #search
+    (input)="onChange(search.value)"
   />
-  <mat-icon matSuffix>search</mat-icon>
-</mat-form-field> -->
-
-<mat-form-field>
-  <input type="text" matInput placeholder="Search" />
   <button mat-button matSuffix>
     <mat-icon>search</mat-icon>
   </button>
 </mat-form-field>
 
 <div class="card-container">
-  <div *ngFor="let product of productsService.products()">
+  <div *ngFor="let product of searchProducts()">
     <mat-card class="product-card">
       <mat-card-content>
         <img class="img" [src]="product['image']" />
@@ -48,4 +44,8 @@
       </mat-card-actions>
     </mat-card>
   </div>
+
+  @if (searchProducts()?.length===0) {
+  <div class="center"><h2>Nu am gasit produsul cautat</h2></div>
+  }
 </div>

@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription, combineLatest, map } from 'rxjs';
 import { UsersService } from '../../service/users.service';
+import { NotificationService } from '../../service/notification.service';
 
 @Component({
   selector: 'app-my-favorites',
@@ -31,6 +32,7 @@ export class MyFavoritesComponent implements OnInit, OnDestroy {
   userService = inject(UsersService);
 
   favorites: any = {};
+  notificationService = inject(NotificationService);
 
   ngOnInit(): void {
     combineLatest([
@@ -69,5 +71,50 @@ export class MyFavoritesComponent implements OnInit, OnDestroy {
 
   isFavorites(product: any) {
     return this.favorites[product.id];
+  }
+  async addToCart(prod: any) {
+    const isNotInStock = prod?.stock === 0;
+    if (isNotInStock) {
+      this.notificationService.error('Cantitatea nu este in stoc');
+      return;
+    }
+
+    const itemToCart = {
+      ...prod,
+      quantity: 1,
+    };
+
+    const newStock = prod.stock - 1;
+    try {
+      this.notificationService.showLoading();
+      await this.productsService.updateProduct({
+        ...prod,
+        stock: newStock,
+      });
+
+      const userProfile = this.userService.currentUserProfile();
+
+      if (!userProfile.cart) {
+        userProfile.cart = {
+          cartItems: [],
+        };
+      }
+
+      const exisitingCartItems = userProfile.cart.cartItems.find(
+        (items: any) => items.id === itemToCart.id
+      );
+
+      if (exisitingCartItems) {
+        exisitingCartItems.quantity += itemToCart.quantity;
+      } else {
+        userProfile.cart.cartItems.push(itemToCart);
+      }
+      await this.userService.updateUser(userProfile);
+
+      this.notificationService.success('Produsul a fost adaugat cu succes');
+    } catch (error: any) {
+    } finally {
+      this.notificationService.hideLoading();
+    }
   }
 }
