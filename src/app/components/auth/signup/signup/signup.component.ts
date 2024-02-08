@@ -68,6 +68,12 @@ export class SignupComponent {
   password = this.signUpForm.get('password');
   confirmPassword = this.signUpForm.get('confirmPassword');
 
+  public showPassword: boolean = false;
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
   async submit() {
     const { name, email, password } = this.signUpForm.value;
     if (!this.signUpForm.valid || !email || !password) {

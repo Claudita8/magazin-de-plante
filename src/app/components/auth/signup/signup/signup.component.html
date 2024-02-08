@@ -22,11 +22,15 @@
       <mat-label> Parola </mat-label>
       <input
         matInput
-        placeholder="Nume"
-        type="password"
+        placeholder=""
+        [type]="showPassword ? 'text' : 'password'"
         formControlName="password"
         name="password"
       />
+
+      <mat-icon matSuffix (click)="togglePasswordVisibility()">
+        {{ showPassword ? "visibility" : "visibility_off" }}
+      </mat-icon>
     </mat-form-field>
     <mat-form-field>
       <mat-label> Confirma parola </mat-label>
