@@ -101,7 +101,10 @@ export class HomeComponent {
   }
 
   isFavorites(product: any) {
-    return this.favorites[product.id];
+    if(this.favorites){
+      return this.favorites[product?.id];
+    }
+  
   }
 
   async addToCart(prod: any) {

@@ -24,6 +24,10 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  transition: 0.8s ease;
+  :hover {
+    transform: scale(1.02);
+  }
 }
 .mat-card-content {
   flex-grow: 1;
@@ -50,4 +54,15 @@
   align-items: flex-start;
   margin-top: auto;
   align-self: center;
+}
+// mobile 390px
+//tableta 767px
+// large 1024 px
+
+@media only screen and (max-width: 390px) {
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 }

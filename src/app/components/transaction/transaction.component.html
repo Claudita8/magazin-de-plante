@@ -1,0 +1,67 @@
+<div class="center">
+  @if(user() && user()?.cart?.cartItems?.length===0){
+  <p>Nu aveti produse in cos</p>
+  } @else {
+  <mat-stepper>
+    <mat-step label="Pasul 1">
+      <form [formGroup]="stepForm">
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Nume"
+            formControlName="name"
+          /> </mat-form-field
+        ><mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Nume familie"
+            formControlName="lastName"
+          /> </mat-form-field
+        ><mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Adresa"
+            formControlName="address"
+          /> </mat-form-field
+        ><mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="number"
+            matInput
+            placeholder="Numar de telefon"
+            formControlName="phoneNumber"
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button color="primary" matStepperNext>Continua</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step label="Pasul 2">
+      <ul>
+        <li *ngFor="let item of user()?.cart?.cartItems">
+          <p>
+            {{ item.name }}
+          </p>
+          <p>{{ item.price }}</p>
+          <p>Cantitate:{{ item.quantity }}</p>
+        </li>
+        <li>
+          <p>Total:{{ getTotalPrice().toFixed(2) }} RON</p>
+        </li>
+      </ul>
+      <div>
+        <button mat-button color="warn" matStepperPrevious>Inapoi</button>
+        <button mat-button color="warn" (click)="finalizeTransaction()">
+          Finalizeaza
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  }
+</div>

@@ -89,7 +89,9 @@ export class SignupComponent {
       this.notificationService.success('Ti-ai creat un cont cu succes');
       this.router.navigate(['']);
     } catch (error: any) {
-      this.notificationService.error(error.message);
+      this.notificationService.error(
+        'Adresa este deja folosita sau a aparut o eroare'
+      );
     } finally {
       this.notificationService.hideLoading();
     }

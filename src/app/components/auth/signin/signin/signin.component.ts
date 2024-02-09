@@ -55,7 +55,7 @@ export class SigninComponent {
       this.notificationService.success('Te-ai autentificat cu succes');
       this.router.navigate(['']);
     } catch (error: any) {
-      this.notificationService.error(error.message);
+      this.notificationService.error('Adresa sau parola nu este corecta');
     } finally {
       this.notificationService.hideLoading();
     }
@@ -74,7 +74,7 @@ export class SigninComponent {
         'Link-ul pentru resetarea parolei a fost trimis'
       );
     } catch (error: any) {
-      this.notificationService.error(error.message);
+      this.notificationService.error('Adresa nu a fost gasita');
     } finally {
       this.notificationService.hideLoading();
     }

@@ -16,6 +16,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MyFavoritesComponent } from './components/my-favorites/my-favorites.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { AdministratorGuard } from './guard/administrator.guard';
+import { TransactionComponent } from './components/transaction/transaction.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['signin']); //De adaugat la fiecare ruta noua
 const redirectLoggedInToLanding = () => redirectLoggedInTo(['']);
@@ -72,6 +73,11 @@ export const routes: Routes = [
     path: 'product-info/:id',
     component: ProductInfoComponent,
     resolve: { product: editProductResolver },
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'transaction',
+    component: TransactionComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
 ];

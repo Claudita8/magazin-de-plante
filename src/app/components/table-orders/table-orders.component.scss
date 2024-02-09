@@ -1,4 +1,37 @@
-.mat-mdc-form-field {
-  font-size: 14px;
-  width: 100%;
+div {
+  overflow: hidden;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+img {
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.expanded-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.example-element-detail {
+  display: flex;
+  gap: 10px;
+}
+
+.example-element-detail {
+  display: flex;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+mat-label {
+  margin-right: 5px;
 }

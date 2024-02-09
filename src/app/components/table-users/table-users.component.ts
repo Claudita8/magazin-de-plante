@@ -109,7 +109,7 @@ export class TableUsersComponent implements OnInit {
     let data = this.dataSource.data.map((users) => {
       return [
         users.email,
-        users.isAdmin || false,
+        users.isAdmin ? 'Da' : 'Nu',
         users.lastName,
         users.firstName,
         users.displayName,
