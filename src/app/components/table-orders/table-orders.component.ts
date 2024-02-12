@@ -11,7 +11,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { OrdersService } from '../../service/orders.service';
-// import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'table-orders',
@@ -30,16 +30,16 @@ import { OrdersService } from '../../service/orders.service';
 export class TableOrdersComponent implements OnInit {
   orderService = inject(OrdersService);
   columnsToDisplay: string[] = [
-    'name',
     'lastName',
+    'name',
     'address',
     'email',
     'phoneNumber',
     'totalPrice',
   ];
   columnNames: any = {
-    name: 'Prenume',
     lastName: 'Nume Familie',
+    name: 'Prenume',
     address: 'Adresa',
     email: 'Email',
     phoneNumber: 'Telefon',
@@ -69,5 +69,31 @@ export class TableOrdersComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  exportExcel() {}
+  fileName = 'orders.xlsx';
+  exportExcel() {
+    let data = this.dataSource.data.map((orders) => {
+      return [
+        orders.lastName,
+        orders.name,
+        orders.address,
+        orders.email,
+        orders.date,
+        orders.phoneNumber,
+        orders.totalPrice,
+      ];
+    });
+    data.unshift([
+      'Nume de familie',
+      'Prenume',
+      'Adresa',
+      'Email',
+      'Data',
+      'Numar de telefon',
+      'Pret total (RON)',
+    ]);
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Orders');
+    XLSX.writeFile(wb, this.fileName);
+  }
 }
