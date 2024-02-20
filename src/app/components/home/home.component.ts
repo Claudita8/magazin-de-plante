@@ -70,7 +70,6 @@ export class HomeComponent {
     return products?.filter((product: any) => {
       const productName = product.name.toLowerCase();
       const searchTermLower = searchTerm.toLowerCase();
-      console.log(productName.includes(searchTermLower));
       return productName.includes(searchTermLower);
     });
   });
@@ -101,10 +100,9 @@ export class HomeComponent {
   }
 
   isFavorites(product: any) {
-    if(this.favorites){
+    if (this.favorites) {
       return this.favorites[product?.id];
     }
-  
   }
 
   async addToCart(prod: any) {

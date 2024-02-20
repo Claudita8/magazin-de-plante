@@ -84,7 +84,6 @@ export class SignupComponent {
       const {
         user: { uid },
       } = await this.authService.signUp(email, password);
-      console.log(uid);
       await this.userService.addUser({ uid, email, displayName: name });
       this.notificationService.success('Ti-ai creat un cont cu succes');
       this.router.navigate(['']);

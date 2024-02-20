@@ -27,7 +27,6 @@ export class ProductsService {
     productSnapshot.docs.forEach((docSnapshot: any) => {
       if (docSnapshot.data()['id'] === product.id) {
         const ref = doc(this.firestore, 'products', docSnapshot.id);
-        console.log(product);
         return updateDoc(ref, { ...product });
       }
       return;

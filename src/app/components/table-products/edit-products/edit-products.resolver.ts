@@ -11,7 +11,6 @@ export const editProductResolver = (route: ActivatedRouteSnapshot) => {
       const product = products.find(
         (product) => String(product['id']) === productId
       );
-      console.log('product', product);
       return product;
     })
   );

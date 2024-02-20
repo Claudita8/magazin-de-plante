@@ -84,7 +84,6 @@ export class TableProductsComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log('filterValue', filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -103,7 +102,7 @@ export class TableProductsComponent implements OnInit {
           this.feedbackService.deleteFeedback(product);
           this.notification.success('Produsul a fost sters cu succes!');
         } catch (error: any) {
-          this.notification.error(error.message);
+          this.notification.error('Produsul nu s-a putut sterge!ss');
         } finally {
           this.notification.hideLoading();
         }

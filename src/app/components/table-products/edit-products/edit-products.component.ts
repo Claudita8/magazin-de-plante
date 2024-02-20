@@ -54,11 +54,6 @@ import { UsersService } from '../../../service/users.service';
 })
 export class EditProductsComponent implements OnInit {
   editProduct = signal<any>({});
-  // @Input()
-  // set product(value: any) {
-  //   console.log('value', value);
-  //   this.editProduct.set(value);
-  // }
   category = productCategory;
 
   fb = inject(FormBuilder);
@@ -117,7 +112,6 @@ export class EditProductsComponent implements OnInit {
         `productImages/${this.editProduct().id}`
       );
 
-      console.log('photoURL', photoURL);
       await this.productsService.updateProduct({
         ...this.editProduct(),
         image: photoURL,
@@ -126,7 +120,6 @@ export class EditProductsComponent implements OnInit {
         'Imaginea produsului a fost modificata cu succes!'
       );
     } catch (error: any) {
-      console.log('error', error);
       this.notifications.error('Imaginea produsului nu a putut fi modificata!');
     } finally {
       this.notifications.hideLoading();

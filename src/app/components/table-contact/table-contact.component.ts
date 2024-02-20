@@ -95,7 +95,6 @@ export class TableContactComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log('filterValue', filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -112,7 +111,7 @@ export class TableContactComponent implements OnInit {
 
       this.notification.success('Cererea a fost actualizata cu succes!');
     } catch (error: any) {
-      this.notification.error(error.message);
+      this.notification.error('Cererea nu s-a putut actualiza');
     } finally {
       this.notification.hideLoading();
     }

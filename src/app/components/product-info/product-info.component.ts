@@ -99,7 +99,7 @@ export class ProductInfoComponent implements OnInit {
       });
       this.notificationService.success('Recenzia a fost adaugata cu succes');
     } catch (error: any) {
-      this.notificationService.error(error.message);
+      this.notificationService.error('Recenzia nu s-a putut adauga');
     } finally {
       this.notificationService.hideLoading();
     }
@@ -109,7 +109,6 @@ export class ProductInfoComponent implements OnInit {
     const isNotInStock = this.quantityForm.value.quantity
       ? this.quantityForm?.value?.quantity > this.editProduct()?.stock
       : false;
-    console.log(isNotInStock);
     if (this.quantityForm.invalid || isNotInStock) {
       this.notificationService.error('Cantitatea nu este in stoc');
       return;
@@ -169,7 +168,7 @@ export class ProductInfoComponent implements OnInit {
             'Comentariul a fost sters cu succes!'
           );
         } catch (error: any) {
-          this.notificationService.error(error.message);
+          this.notificationService.error('Comentariul nu s -a putut sterge!');
         } finally {
           this.notificationService.hideLoading();
         }

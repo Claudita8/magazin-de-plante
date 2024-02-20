@@ -2,6 +2,12 @@ img {
   display: flex;
   align-self: left;
 }
+.img {
+  transition: 0.8s ease;
+  :hover {
+    transform: scale(1.05);
+  }
+}
 
 .content {
   flex: 1;

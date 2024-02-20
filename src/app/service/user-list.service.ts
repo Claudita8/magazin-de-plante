@@ -25,20 +25,19 @@ import { NotificationService } from './notification.service';
 })
 export class UserListService {
   firestore = inject(Firestore);
-  usersCollection$ = collection(this.firestore, 'users')
-  notifications = inject(NotificationService)
+  usersCollection$ = collection(this.firestore, 'users');
+  notifications = inject(NotificationService);
 
   getUsersList() {
-    return collectionData(this.usersCollection$)
+    return collectionData(this.usersCollection$);
   }
   async updateUser(userId: string, isAdmin: boolean) {
     try {
       const ref = doc(this.firestore, 'users', userId);
-      await updateDoc(ref, {isAdmin: isAdmin})
-      this.notifications.success('User updatat')
-
-    }catch(error: any) {
-      this.notifications.error(error.message)
+      await updateDoc(ref, { isAdmin: isAdmin });
+      this.notifications.success('User updatat');
+    } catch (error: any) {
+      this.notifications.error('Userul nu a putut fi updatat');
     }
   }
 }

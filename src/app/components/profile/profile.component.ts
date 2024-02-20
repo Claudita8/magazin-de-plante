@@ -110,7 +110,6 @@ export class ProfileComponent {
         'Imaginea utilizatorului a fost modificata cu succes!'
       );
     } catch (error: any) {
-      console.log('error', error);
       this.notifications.error(
         'Imaginea utilizatorului nu a putut fi modificata!'
       );
@@ -129,10 +128,12 @@ export class ProfileComponent {
       this.notifications.showLoading();
       await this.authService.passwordReset(email);
       this.notifications.success(
-        'Link-ul pentru resetarea parolei a fost trimis'
+        'Link-ul pentru resetarea parolei a fost trimis!'
       );
     } catch (error: any) {
-      this.notifications.error(error.message);
+      this.notifications.error(
+        'Link-ul pentru resetarea parolei nu a putut fi trimis!'
+      );
     } finally {
       this.notifications.hideLoading();
     }

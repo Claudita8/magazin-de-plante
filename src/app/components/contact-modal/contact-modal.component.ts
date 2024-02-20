@@ -50,7 +50,7 @@ export class ContactModalComponent {
 
       this.notificationService.success('Cererea a fost trimisa cu succes');
     } catch (error: any) {
-      this.notificationService.error(error.message);
+      this.notificationService.error('Cererea nu a putut fi trimisa');
     } finally {
       this.notificationService.hideLoading();
     }

@@ -49,7 +49,6 @@ export class TransactionComponent {
 
   constructor() {
     this.userService.currentUserProfile$.subscribe((user) => {
-      console.log('user', user);
       this.user.set(user);
     });
     effect(() => {
