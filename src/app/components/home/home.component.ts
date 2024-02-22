@@ -2,19 +2,6 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
-
-import {
-  Storage,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from '@angular/fire/storage';
-import {
-  Firestore,
-  addDoc,
-  collection,
-  collectionData,
-} from '@angular/fire/firestore';
 import { combineLatest, map, of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from '../product/product.components';

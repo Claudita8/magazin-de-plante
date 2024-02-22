@@ -6,7 +6,7 @@ import { ProductComponent } from '../product/product.components';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Subscription, combineLatest, map } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { UsersService } from '../../service/users.service';
 import { NotificationService } from '../../service/notification.service';
 

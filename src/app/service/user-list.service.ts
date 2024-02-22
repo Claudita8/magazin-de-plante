@@ -4,20 +4,9 @@ import {
   collection,
   collectionData,
   doc,
-  docData,
-  setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import {
-  Storage,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from '@angular/fire/storage';
 
-import { AuthService } from './auth.service';
-import { Observable, of, switchMap } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { NotificationService } from './notification.service';
 
 @Injectable({

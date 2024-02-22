@@ -1,17 +1,13 @@
 import { Injectable, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Firestore,
   addDoc,
   collection,
   collectionData,
-  deleteDoc,
   doc,
-  docData,
   getDocs,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Storage } from '@angular/fire/storage';
 import { UsersService } from './users.service';
 import { map } from 'rxjs';
 @Injectable({

@@ -7,13 +7,9 @@ import {
   collectionData,
   deleteDoc,
   doc,
-  docData,
-  docSnapshots,
   getDocs,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Storage } from '@angular/fire/storage';
-
 @Injectable({
   providedIn: 'root',
 })

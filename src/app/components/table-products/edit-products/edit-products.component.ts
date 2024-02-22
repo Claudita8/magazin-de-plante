@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,14 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {
-  getDownloadURL,
-  ref,
-  Storage,
-  uploadBytes,
-} from '@angular/fire/storage';
-import { addDoc } from '@angular/fire/firestore';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Storage } from '@angular/fire/storage';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductsService } from '../../../service/products.service';
 import { NotificationService } from '../../../service/notification.service';
 import { productCategory } from '../../../constants';

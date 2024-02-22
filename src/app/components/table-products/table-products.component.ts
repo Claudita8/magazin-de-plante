@@ -7,9 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProductsService } from '../../service/products.service';
 import { NotificationService } from '../../service/notification.service';
 import { MatIconModule } from '@angular/material/icon';
-
-import { MatGridListModule } from '@angular/material/grid-list';
-
 import { MatDialog } from '@angular/material/dialog';
 
 import {
@@ -102,7 +99,7 @@ export class TableProductsComponent implements OnInit {
           this.feedbackService.deleteFeedback(product);
           this.notification.success('Produsul a fost sters cu succes!');
         } catch (error: any) {
-          this.notification.error('Produsul nu s-a putut sterge!ss');
+          this.notification.error('Produsul nu s-a putut sterge!');
         } finally {
           this.notification.hideLoading();
         }
@@ -132,10 +129,7 @@ export class TableProductsComponent implements OnInit {
     ]);
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Produse'); // de schiimbat din prod in alta denumire
+    XLSX.utils.book_append_sheet(wb, ws, 'Produse');
     XLSX.writeFile(wb, this.fileName);
   }
-
-  //De facut importul cu *, de scris in let data proprietatile cum sunt in firebase, in data un unshift - de pus coloanele in ordine, de schimbat numele fileName
-  //ex: users.xlsx
 }
