@@ -10,7 +10,7 @@ import { FinalOrderModalComponent } from './final-order-modal.component';
 import { UsersService } from '../../service/users.service';
 import { NotificationService } from '../../service/notification.service';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
-
+import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'app-transaction',
   standalone: true,
@@ -23,6 +23,7 @@ import { Firestore, addDoc, collection } from '@angular/fire/firestore';
     MatDialogModule,
     ReactiveFormsModule,
     FinalOrderModalComponent,
+    MatDividerModule,
   ],
   templateUrl: './transaction.component.html',
   styleUrl: './transaction.component.scss',
