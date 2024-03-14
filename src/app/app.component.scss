@@ -20,26 +20,19 @@ mat-progress-spinner {
   margin-right: 450px;
 }
 
-// @media only screen and (min-width: 390px) and (max-width: 767px) {
-//   mat-toolbar {
-//     display: inline-block;
-//     flex-direction: column;
-//     flex-wrap: nowrap;
-//   }
-// }
-
-// @media only screen and (min-width: 768px) and (max-width: 1023) {
-//   mat-toolbar {
-//     display: inline-block;
-//     flex-direction: column;
-//     flex-wrap: nowrap;
-//   }
-// }
-
-// @media only screen and (min-width: 1024) {
-//   mat-toolbar {
-//     display: flex;
-//     flex-direction: column;
-//     flex-wrap: nowrap;
-//   }
-// }
+@media only screen and (min-width: 390px) and (max-width: 767px) {
+  mat-toolbar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; 
+    .logo {
+      justify-content: left;
+      margin-right: 370px;
+      img {
+        width: 60px;
+        height: 56px;
+      }
+    }
+  }
+}

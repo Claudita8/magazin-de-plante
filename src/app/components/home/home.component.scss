@@ -59,26 +59,23 @@
 //tableta 767px
 // large 1024 px
 
-// @media only screen and (min-width: 390px) and (max-width: 767px) {
-//   .card-container {
-//     display: flex;
-//     flex-direction: column;
-//     flex-wrap: nowrap;
-//   }
-// }
-
-// @media only screen and (min-width: 768px) and (max-width: 1023) {
-//   .card-container {
-//     display: flex;
-//     flex-direction: column;
-//     flex-wrap: nowrap;
-//   }
-// }
-
-// @media only screen and (min-width: 1024) {
-//   .card-container {
-//     display: flex;
-//     flex-direction: column;
-//     flex-wrap: nowrap;
-//   }
-// }
+@media only screen and (min-width: 390px) and (max-width: 767px) {
+  .card {
+    width: 50%;
+    max-width: 300px;
+    height: 450px;
+    margin: 10px;
+  }
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .product-card {
+    width: 400px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}

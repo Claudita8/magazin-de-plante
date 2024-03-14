@@ -64,9 +64,16 @@ export class TransactionComponent {
   }
 
   getTotalPrice() {
-    return this.user()?.cart?.cartItems.reduce((acc: any, item: any) => {
-      return acc + item.quantity * item.price;
-    }, 0);
+    const cartTotal = this.user()?.cart?.cartItems.reduce(
+      (acc: any, item: any) => {
+        return acc + item.quantity * item.price;
+      },
+      0
+    );
+
+    const deliveryPrice = 26.9;
+    const totalPrice = cartTotal + deliveryPrice;
+    return totalPrice;
   }
 
   async finalizeTransaction() {
@@ -79,6 +86,7 @@ export class TransactionComponent {
       cartItems: this.user().cart.cartItems,
       date: new Date().toLocaleDateString(),
       totalPrice: this.getTotalPrice(),
+      deliveryPrice: 26.9,
     };
 
     try {
