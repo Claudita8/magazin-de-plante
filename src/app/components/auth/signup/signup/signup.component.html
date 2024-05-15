@@ -2,15 +2,25 @@
   <h1><mat-icon>person</mat-icon>Inregistrare</h1>
   <form [formGroup]="signUpForm" (ngSubmit)="submit()">
     <mat-form-field>
-      <mat-label> Nume </mat-label>
-      <input matInput placeholder="Nume" type="text" formControlName="name" />
+      <mat-label> Username </mat-label>
+      <input
+        matInput
+        placeholder="John Doe"
+        type="text"
+        formControlName="name"
+      />
       <mat-error *ngIf="name?.hasError('required')">
         Numele este necesar sa fie introdus
       </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label> Adresa email </mat-label>
-      <input matInput placeholder="Nume" type="email" formControlName="email" />
+      <input
+        matInput
+        placeholder="john.doe@domain.com"
+        type="email"
+        formControlName="email"
+      />
       <mat-error *ngIf="email?.hasError('required')">
         Numele este necesar sa fie introdus
       </mat-error>
@@ -22,7 +32,7 @@
       <mat-label> Parola </mat-label>
       <input
         matInput
-        placeholder=""
+        placeholder="Scrie-ti parola"
         [type]="showPassword ? 'text' : 'password'"
         formControlName="password"
         name="password"
@@ -36,7 +46,7 @@
       <mat-label> Confirma parola </mat-label>
       <input
         matInput
-        placeholder="Nume"
+        placeholder="Confirma parola"
         type="password"
         formControlName="confirmPassword"
         name="confirmPassword"

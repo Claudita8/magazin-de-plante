@@ -17,6 +17,9 @@ h1 {
   margin: 10px;
   display: flex;
   flex-direction: column;
+  :hover {
+    transform: scale(1.02);
+  }
 }
 
 @media screen and (max-width: 768px) {
