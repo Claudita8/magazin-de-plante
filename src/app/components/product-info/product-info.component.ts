@@ -46,6 +46,21 @@ export class ProductInfoComponent implements OnInit {
   fb = inject(FormBuilder);
   dialog = inject(MatDialog);
 
+  getColor(stockMessage: string): string {
+    switch (stockMessage) {
+      case 'Stoc epuizat':
+        return 'red';
+      case 'Ultimele produse':
+        return 'orange';
+      case 'Stoc limitat':
+        return '#FFBF00';
+      case 'In stoc':
+        return 'green';
+      default:
+        return 'black';
+    }
+  }
+
   quantityForm = this.fb.group({
     quantity: [1, Validators.required],
   });

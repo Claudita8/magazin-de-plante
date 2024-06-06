@@ -21,7 +21,13 @@
           <br />
           <div style="display: flex; flex-direction: row">
             Stoc:
-            <mat-error> {{ editProduct().stock | stockMessage }}</mat-error>
+            <span
+              [ngStyle]="{
+                color: getColor(editProduct().stock | stockMessage)
+              }"
+            >
+              {{ editProduct().stock | stockMessage }}
+            </span>
             <br />
             <br />
           </div>
