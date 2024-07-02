@@ -14,6 +14,14 @@
     alt="Oferta"
     style="max-width: 80%; display: flex; margin: auto"
   />
+  <div style="text-align: center; margin-top: 20px">
+    <button
+      class="scroll-button"
+      onclick="document.getElementById('contact-button').scrollIntoView({behavior: 'smooth'});"
+    >
+      <img src="assets/scroll.png" alt="Scroll Down" />
+    </button>
+  </div>
 </div>
 
 <br />
@@ -87,7 +95,13 @@
       într-o oază de frumusețe și prospețime cu plantele de la Atelierul Verde!
     </p>
   </mat-expansion-panel>
-  <button (click)="openModal()" mat-raised-button class="contact-us-btn">
+  <button
+    id="contact-button"
+    (click)="openModal()"
+    mat-raised-button
+    class="contact-us-btn"
+  >
     Contacteaza-ne
   </button>
 </mat-accordion>
+  
